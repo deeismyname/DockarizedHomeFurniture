@@ -54,7 +54,7 @@
 
                                                     <div style="display: flex">
                                                         <a href="{{ route('products.show', $product->id) }}" title="Show"><div class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i> show</div></a><span> . </span>
-                                                        <a href="{{ route('products.edit', $product->id) }}" title="Edit"><div class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> edit</div></a>.
+                                                        <a href="{{ route('products.edit', $product) }}" title="Edit"><div class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> edit</div></a>.
                                                         {{-- @include('menu.order_menu') --}}
                                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                                             @csrf

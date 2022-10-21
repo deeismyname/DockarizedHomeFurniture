@@ -35,7 +35,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('products.index') }}">All products</a></li>
                         <li><a href="{{ route('products.create') }}">Create Product</a></li>
-                        {{-- <li><a href="{{ route('products.edit') }}">Edit Product</a></li> --}}
                     </ul>
                 </li>
 

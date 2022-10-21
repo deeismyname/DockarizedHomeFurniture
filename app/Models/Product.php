@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'tags' => 'array',
+        'colors' => 'array',
+        'other_images' => 'array'
+    ];
+
     protected $guarded = ['id'];
     public function images(){
         return $this->hasMany(Images::class);

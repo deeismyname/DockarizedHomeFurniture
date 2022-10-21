@@ -34,7 +34,7 @@
                                                 <label for="example-text-input"
                                                     class="col-sm-2 col-form-label">Category</label>
                                                 <div class="col-sm-6">
-                                                    <input name="name" class="form-control" type="text" value=""
+                                                    <input name="category" class="form-control" type="text" value=""
                                                         id="example-text-input">
                                                 </div>
                                             </div>
@@ -50,7 +50,7 @@
                                         <div class="row mb-3">
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Price</label>
                                             <div class="col-sm-6">
-                                                <input name="catchy_title" class="form-control" type="number"
+                                                <input name="price" class="form-control" type="number"
                                                     value="" id="example-text-input">
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Product
                                         Description</label>
                                     <div class="col-sm-8">
-                                        <textarea id="elm1" name="long_description" placeholder="Please enter a vivid description of the product"></textarea>
+                                        <textarea id="elm1" name="description" placeholder="Please enter a vivid description of the product"></textarea>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -214,21 +214,31 @@
                                     </div>
                                     <div class="col">
                                         <div class="row mb-3">
-                                            <label for="example-text-input" class="col-sm-2 col-form-label">Add Other
-                                                Images</label>
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Add Second Image
+                                                </label>
                                             <div class="col-sm-6">
-                                                <input name="multi_image[]" accept="image/*" class="form-control"
+                                                <input name="image_1" accept="image/*" class="form-control"
                                                     type="file" id="image" multiple="">
                                             </div>
                                         </div>
                                         <!-- end row -->
+
+                                        <div class="row mb-3">
+                                            <label for="example-text-input" class="col-sm-2 col-form-label">Add Third Image
+                                                </label>
+                                            <div class="col-sm-6">
+                                                <input name="image_2" accept="image/*" class="form-control"
+                                                    type="file" id="image" multiple="">
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-info waves-effect waves-light"
                                     value="Create Product">
                                 </form>
                             </div>
-                            
+
                             {{-- <a href="{{route('admin.profile')}}"><input  class="btn btn-danger waves-effect waves-light" value="Cancel" ></a> --}}
 
                         </div>
