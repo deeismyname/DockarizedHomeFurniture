@@ -107,7 +107,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.edit.edit_product');
+        return view('admin.edit.edit_product', compact('product'));
     }
 
     /**
@@ -118,55 +118,93 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
-    {
-        $image = $request->file('primary_image');
-        $name_gen = md5(rand(1000, 10000)).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
-
-        Image::make($image)->resize(523,605)->save('upload/products/'.$name_gen);
-        $save_url = 'upload/products/'.$name_gen;
+     {
 
 
-    $image_1 = $request->file('image_1');
-    $name_gen = md5(rand(1000, 10000)).'.'.$image_1->getClientOriginalExtension();  // 3434343443.jpg
+$my_array = [$request->file('primary_image'), $request->file('image_1'), $request->file('image_2')];
+$insert_array = [];
+foreach($my_array as $item) {
+$save_url = '';
+if($item) {
+$image = $item;
+    $name_gen = md5(rand(1000, 10000)).'.'.$image->getClientOriginalExtension();
 
-    Image::make($image_1)->resize(523,605)->save('upload/products/'.$name_gen);
-    $save_url_1 = 'upload/products/'.$name_gen;
-
-
-
-    $image_2 = $request->file('image_2');
-        $name_gen = md5(rand(1000, 10000)).'.'.$image_2->getClientOriginalExtension();  // 3434343443.jpg
-
-        Image::make($image_2)->resize(523,605)->save('upload/products/'.$name_gen);
-        $save_url_2 = 'upload/products/'.$name_gen;
+    Image::make($image)->resize(523,605)->save('upload/products/'.$name_gen);
+    $save_url = 'upload/products/'.$name_gen;
 
 
-        Product::insert([
-            'name' => $request->name,
-            'category' => $request->category,
-            'price' => $request->price,
-            'description' => $request->description,
-            'status' => $request -> status,
-            'estimated_delivery_time' => $request->estimated_delivery_time,
-            'available_quantity' => $request->available_quantity,
-            'colors' => $request->colors,
-            'supplier_name' => $request->supplier_name,
-            'supplier_phone' => $request->supplier_phone,
-            'video_description' => $request->video_description,
-            'primary_image' => $save_url,
-            'image_1' => $save_url_1,
-            'image_2' => $save_url_2,
+}
+array_push($insert_array, $save_url);
+
+}
 
 
+$request->validate([
+    'name' =>  'max:255',
+    'category' => 'max:255',
+    'price' =>  'max:255',
+    'description' => 'nullable | max:255',
+    'status'=> 'max:255',
+    'estimated_delivery_time' => 'max:255',
+    'available_quantity'=> 'max:255',
+    'colors'=> 'max:255',
+    'supplier_name'=> 'max:255',
+    'supplier_phone' => 'max:255',
+    'video_description'=> 'max:255',
+
+]);
+
+        // $product = Product::find($product->id);
+       $product->update ([
+        'name' => $request->name,
+        'category' => $request->category,
+        'price' => $request->price,
+        'description' => $request->description,
+        'status' => $request -> status,
+        'estimated_delivery_time' => $request->estimated_delivery_time,
+        'available_quantity' => $request->available_quantity,
+        'colors' => $request->colors,
+        'supplier_name' => $request->supplier_name,
+        'supplier_phone' => $request->supplier_phone,
+        'video_description' => $request->video_description,
+        'primary_image' => $insert_array[0],
+        'image_1' => $insert_array[1],
+        'image_2' => $insert_array[2],
         ]);
 
 
+    // $product->update($validatedData + [ 'primary_image' => $insert_array[0], 'image_1' => $insert_array[1], 'image_2' => $insert_array[2], ]);
+
+
+
         $notification = array(
-        'message' => 'Product created successfully',
+        'message' => 'Product updated successfully',
         'alert-type' => 'success'
     );
 
     return redirect()->back()->with($notification);
+
+    // $request->validate([
+
+    //         'name' => ['required', 'string'],
+    //         'category' => ['required', 'string'],
+    //         'price' => ['required', 'string'],
+    //         'description' => ['required', 'string'],
+    //         'status'=> ['required', 'string'],
+    //         'estimated_delivery_time' => ['required', 'string'],
+    //         'available_quantity'=> ['required', 'number'],
+    //         'colors'=> ['string'],
+    //         'supplier_name'=> ['required', 'string'],
+    //         'supplier_phone' => ['required', 'string'],
+    //         'video_description'=> ['required', 'string'],
+
+
+    // ]);
+
+    // $product->update($request->all() + [ 'primary_image' => $insert_array[0], 'image_1' => $insert_array[1], 'image_2' => $insert_array[2], ]);
+
+    // return redirect()->route('products.index')
+    //                 ->with('success','Product updated successfully');
 }
 
 
@@ -178,6 +216,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->back()
+                        ->with('success','Product deleted successfully');
     }
 }

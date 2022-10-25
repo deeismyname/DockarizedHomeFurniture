@@ -56,15 +56,11 @@
                                                         <a href="{{ route('products.show', $product->id) }}" title="Show"><div class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i> show</div></a><span> . </span>
                                                         <a href="{{ route('products.edit', $product) }}" title="Edit"><div class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> edit</div></a>.
                                                         {{-- @include('menu.order_menu') --}}
-                                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                        <form method="post" action="{{route('products.destroy',$product->id)}}">
+                                                            @method('delete')
                                                             @csrf
-                                                            @method('DELETE')
-                                                            <a  href="{{ route('products.destroy', $product->id) }}"><div class="btn btn-outline-danger btn-sm"><i class="fas fa-eye"></i> delete</div></a>
-
-                                                    </div>
-
-
-                                                    </form>
+                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        </form>
                                                 </td>
                                             </tr>
                                         @endforeach

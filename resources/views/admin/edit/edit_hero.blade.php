@@ -47,7 +47,7 @@
               <div class="row mb-3">
                  <label for="example-text-input" class="col-sm-2 col-form-label"> Image Preview</label>
                 <div class="col-sm-10">
-                    <img id="showImage" class="" width="500px" src="{{ (!empty($hero->image))? url('upload/hero/'.$hero->image):url('upload/no_image.jpg') }}" alt="Hero image">
+                    <img id="showImage" class="" width="500px" src="{{ (!empty($hero->image))? url($hero->image):url('upload/no_image.jpg') }}" alt="Hero image">
                 </div>
             </div>
             <!-- end row -->

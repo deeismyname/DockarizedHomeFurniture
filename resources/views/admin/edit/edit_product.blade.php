@@ -13,16 +13,19 @@
 
 
                             <div class="container">
-                                <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
-                                    <h4 class="card-title">Create Product</h4><br><br>
+                                <form action="{{ route('products.update',$product->id) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
+
+
+                                    <h4 class="card-title">Edit Product</h4><br><br>
 
                                     <div class="row">
                                         <div class="col">
                                             <div class="row mbr-1">
                                                 <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
                                                 <div class="col-sm-6">
-                                                    <input name="name" class="form-control" type="text" value=""
+                                                    <input name="name" class="form-control" type="text" value="{{$product->name}}"
                                                         id="example-text-input">
                                                 </div>
                                             </div>
@@ -34,7 +37,7 @@
                                                 <label for="example-text-input"
                                                     class="col-sm-2 col-form-label">Category</label>
                                                 <div class="col-sm-6">
-                                                    <input name="category" class="form-control" type="text" value=""
+                                                    <input name="category" class="form-control" type="text" value="{{$product->category}}"
                                                         id="example-text-input">
                                                 </div>
                                             </div>
@@ -51,7 +54,7 @@
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Price</label>
                                             <div class="col-sm-6">
                                                 <input name="price" class="form-control" type="number"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->price}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -60,7 +63,7 @@
                                         <div class="row mb-3">
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Status</label>
                                             <div class="col-sm-6">
-                                                <input name="status" class="form-control" type="text" value=""
+                                                <input name="status" class="form-control" type="text" value="{{$product->status}}"
                                                     id="example-text-input">
                                             </div>
                                         </div>
@@ -76,7 +79,7 @@
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Product
                                         Description</label>
                                     <div class="col-sm-8">
-                                        <textarea id="elm1" name="description" placeholder="Please enter a vivid description of the product"></textarea>
+                                        <textarea id="elm1" name="description" placeholder="Please enter a vivid description of the product" value="{{$product->description}}" >{{$product->description}}</textarea>
                                     </div>
                                 </div>
                                 <!-- end row -->
@@ -89,7 +92,7 @@
                                         <div class="row mb-3">
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Tags</label>
                                             <div class="col-sm-6">
-                                                <input name="tags" class="form-control" type="text" value=""
+                                                <input name="tags" class="form-control" type="text" value="{{$product->tags}}"
                                                     id="example-text-input">
                                             </div>
                                         </div>
@@ -103,7 +106,7 @@
                                                 Time</label>
                                             <div class="col-sm-6">
                                                 <input name="estimated_delivery_time" class="form-control" type="text"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->estimated_delivery_time}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -120,7 +123,7 @@
                                                 Quantity</label>
                                             <div class="col-sm-6">
                                                 <input name="available_quantity" class="form-control" type="text"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->available_quantity}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -129,7 +132,7 @@
                                         <div class="row mb-3">
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Colors</label>
                                             <div class="col-sm-6">
-                                                <input name="colors" class="form-control" type="text" value=""
+                                                <input name="colors" class="form-control" type="text" value="{{$product->colors}}"
                                                     id="example-text-input">
                                             </div>
                                         </div>
@@ -148,7 +151,7 @@
                                                 Name</label>
                                             <div class="col-sm-6">
                                                 <input name="supplier_name" class="form-control" type="text"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->supplier_name}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -159,7 +162,7 @@
                                                 Contact</label>
                                             <div class="col-sm-6">
                                                 <input name="supplier_contact" class="form-control" type="text"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->supplier_contact}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -177,7 +180,7 @@
                                                 Link</label>
                                             <div class="col-sm-6">
                                                 <input name="video_description" class="form-control" type="text"
-                                                    value="" id="example-text-input">
+                                                    value="{{$product->video_description}}" id="example-text-input">
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -187,7 +190,7 @@
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Primarry
                                                 Image</label>
                                             <div class="col-sm-6">
-                                                <input name="primary_image" accept="image/*" class="form-control"
+                                                <input name="primary_image" accept="image/*" class="form-control" value="{{$product->primary_image}}"
                                                     type="file" id="image">
                                             </div>
                                         </div>
@@ -205,9 +208,8 @@
                                             <label for="example-text-input" class="col-sm-2 col-form-label"> Primary Image
                                                 Preview</label>
                                             <div class="col-sm-6">
-                                                <img id="showImage" class="" width="300px"
-                                                    src="{{ !empty($Product->image) ? url('upload/products/' . $product->image) : url('upload/no_image.jpg') }}"
-                                                    alt="Hero image">
+                                                <img id="showImage" class="" width="300px" src="{{ (!empty($product->image))? url($product->image):url('upload/no_image.jpg') }}" alt="Product image">
+                                                {{-- <img id="showImage" class="" width="300px"src="{{ !empty($product->image) ? url($product->image):url('upload/no_image.jpg') }}"alt="Hero image"> --}}
                                             </div>
                                         </div>
                                         <!-- end row -->
@@ -217,7 +219,7 @@
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Add Second Image
                                                 </label>
                                             <div class="col-sm-6">
-                                                <input name="image_1" accept="image/*" class="form-control"
+                                                <input name="image_1" accept="image/*" class="form-control" value="{{$product->image_1}}"
                                                     type="file" id="image" multiple="">
                                             </div>
                                         </div>
@@ -227,7 +229,7 @@
                                             <label for="example-text-input" class="col-sm-2 col-form-label">Add Third Image
                                                 </label>
                                             <div class="col-sm-6">
-                                                <input name="image_2" accept="image/*" class="form-control"
+                                                <input name="image_2" accept="image/*" class="form-control" value="{{$product->image_2}}"
                                                     type="file" id="image" multiple="">
                                             </div>
                                         </div>
@@ -235,7 +237,7 @@
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-info waves-effect waves-light"
-                                    value="Create Product">
+                                    value="Edit Product">
                                 </form>
                             </div>
 

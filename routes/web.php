@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\ShowCategoryController;
 use App\Models\ShowCategory;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,10 @@ Route::middleware(['auth', 'status'])->group( function(){
     Route::resource(name:'/set_page', controller: HomeViewController::class);
     Route::resource(name: '/show_category', controller: ShowCategoryController::class);
     Route::resource(name: '/products', controller: ProductController::class);
+    // Route::resource(name: '/shop', controller: ShopController::class);
 });
+
+Route::resource(name: '/shop', controller: ShopController::class);
 
 
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\WelcomeImage;
 use Image;
+use App\Models\WelcomeImage;
+use Illuminate\Http\Request;
 
 
 class HomeViewController extends Controller
