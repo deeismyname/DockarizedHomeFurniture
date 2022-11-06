@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-class ShopController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        $product = Product::all();
-        return view('main.products', compact('product'));
+        $product = Product::findOrFail($product);
+        return view('main.checkout', compact('product'));
     }
 
     /**
@@ -36,10 +37,10 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
-    /**
+   /**
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
@@ -47,8 +48,11 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return view('main.product', compact('product'));
+        $date = date('d-m-Y H:i:s');
+        $user = auth()->user();
+
+        $product = Product::findOrFail($id);
+        return view('main.checkout', compact('product', 'user', 'date'));
     }
 
     /**

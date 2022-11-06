@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -14,10 +15,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Product $product)
+    public function index()
     {
-        $product = Product::all();
-        return view('admin.all_products', compact('product'));
+        $product = Product::with('category')->get();
+        // $category = Categories::with('products')->get();
+        return view('admin.all_products', compact('product', 'category'));
     }
 
     /**
@@ -221,4 +223,11 @@ $request->validate([
         return redirect()->back()
                         ->with('success','Product deleted successfully');
     }
+
+    public function checkout(Product $product)
+    {
+        return view('main.checkout', compact('product'));
+    }
 }
+
+

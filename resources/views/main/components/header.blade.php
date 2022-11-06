@@ -5,17 +5,14 @@
             <span class = "text-uppercase fw-lighter ms-2">Attire</span>
         </a>
 
-        <div class = "order-lg-2 nav-btns">
-            <button type = "button" class = "btn btn-light position-relative">
-                <i class = "fa fa-shopping-cart"></i>
-                <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary " style="border:2px solid rgb(240, 235, 235) ;">5</span>
-            </button>
-            <button type = "button" class = "btn btn-light position-relative">
-                <i class = "fa fa-heart"></i>
-                <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary" style="border:2px solid rgb(240, 235, 235) ;">2</span>
-            </button>
+        <div class = "order-lg-2 nav-btns" style="padding-rigth:5rem !important; ">
             <button type = "button" class = "btn btn-light position-relative">
                 <i class = "fa fa-search"></i>
+            </button>
+        </div>
+        <div class = "order-lg-2 nav-btns">
+            <button type = "button" class = "btn btn-light position-relative">
+                <i class = "fas fa-address-card"></i>
             </button>
         </div>
 

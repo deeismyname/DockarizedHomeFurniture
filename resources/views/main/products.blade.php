@@ -11,16 +11,23 @@
         <div class = "row g-0">
             <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                 <button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">All</button>
-                <button type = "button" class = "btn m-2 text-dark" data-filter = ".best">Best Sellers</button>
-                <button type = "button" class = "btn m-2 text-dark" data-filter = ".feat">Featured</button>
-                <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">New Arrival</button>
+                <button type = "button" class = "btn m-2 text-dark" data-filter = "#Living Room">Living Room</button>
+                <button type = "button" class = "btn m-2 text-dark" data-filter = ".feat">Bed Room</button>
+                <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">Kitchen</button>
+                <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">Outdoor / Garden</button>
+                {{-- @if ($product->count())
+                @foreach ($product as $index => $product)
+                <button type = "button" class = "btn m-2 text-dark" data-filter = ".{{$product->category}}">{{$product->category->name}}</button>
+                @endforeach
+            @endif --}}
             </div>
 
             <div class = "collection-list mt-4 row gx-0 gy-3">
 
                 @if ($product->count())
                 @foreach ($product as $index => $product)
-                <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                <div class = "col-md-6 col-lg-4 col-xl-3 p-2 {{$product->category}}">
+
                     <div class = "collection-img position-relative">
                         <img src = "{{$product->primary_image}}" class = "w-100">
                        <a href="{{route('shop.show', $product)}}"> <span class = "position-absolute bg-primary text-white d-flex align-items-center justify-content-center">view</span></a>

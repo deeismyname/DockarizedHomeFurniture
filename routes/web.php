@@ -8,6 +8,7 @@ use App\Http\Controllers\ShowCategoryController;
 use App\Models\ShowCategory;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,16 +31,26 @@ Route::middleware(['auth', 'status'])->group( function(){
     Route::resource(name:'/set_page', controller: HomeViewController::class);
     Route::resource(name: '/show_category', controller: ShowCategoryController::class);
     Route::resource(name: '/products', controller: ProductController::class);
+    // Route::resource(name: '/checkout', controller: CheckoutController::class);
     // Route::resource(name: '/shop', controller: ShopController::class);
 });
-
+// Route::resource(name: '/checkout', controller: CheckoutController::class)->middleware('auth');
+Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware('auth')->name('checkout');
+Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource(name: '/shop', controller: ShopController::class);
+
 
 
 
 // Route::middleware(['auth', 'status'])->group( function(){
 //     Route::resource(name:'/set_page', controller: WelcomeImageController::class);
 // });
+
+
+Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
+
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
+
 
 
 
