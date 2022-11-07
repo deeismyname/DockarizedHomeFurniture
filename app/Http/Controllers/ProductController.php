@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $product = Product::with('category')->get();
         // $category = Categories::with('products')->get();
-        return view('admin.all_products', compact('product', 'category'));
+        return view('admin.all_products', compact('product'));
     }
 
     /**
@@ -29,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.edit.create_product');
+        $category = Categories::all();
+        return view('admin.edit.create_product', compact('category'));
     }
 
     /**
@@ -44,14 +45,14 @@ class ProductController extends Controller
         $image = $request->file('primary_image');
             $name_gen = md5(rand(1000, 10000)).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
 
-            Image::make($image)->resize(523,605)->save('upload/products/'.$name_gen);
+            Image::make($image)->resize(605,300)->save('upload/products/'.$name_gen);
             $save_url = 'upload/products/'.$name_gen;
 
 
         $image_1 = $request->file('image_1');
         $name_gen = md5(rand(1000, 10000)).'.'.$image_1->getClientOriginalExtension();  // 3434343443.jpg
 
-        Image::make($image_1)->resize(523,605)->save('upload/products/'.$name_gen);
+        Image::make($image_1)->resize(605,300)->save('upload/products/'.$name_gen);
         $save_url_1 = 'upload/products/'.$name_gen;
 
 
@@ -59,7 +60,7 @@ class ProductController extends Controller
         $image_2 = $request->file('image_2');
             $name_gen = md5(rand(1000, 10000)).'.'.$image_2->getClientOriginalExtension();  // 3434343443.jpg
 
-            Image::make($image_2)->resize(523,605)->save('upload/products/'.$name_gen);
+            Image::make($image_2)->resize(605,300)->save('upload/products/'.$name_gen);
             $save_url_2 = 'upload/products/'.$name_gen;
 
 

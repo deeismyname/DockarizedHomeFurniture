@@ -34,8 +34,14 @@
                                                 <label for="example-text-input"
                                                     class="col-sm-2 col-form-label">Category</label>
                                                 <div class="col-sm-6">
-                                                    <input name="category" class="form-control" type="text" value=""
-                                                        id="example-text-input">
+                                                    <select name="category" class="form-control" type="text" value="" id="example-text-input">
+                                                        <option value="" style="text-align: center">--Select a category--</option>
+                                                        @if ($category -> count())
+                                                            @foreach ($category as $index => $category)
+                                                            <option value="{{$category->id}}" style="text-align: center">{{$category->category_name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
                                                 </div>
                                             </div>
                                             <!-- end row -->

@@ -11,7 +11,7 @@
                             <div class="col-md-12">
                                 <div class="images p-3">
                                     <div class="text-center p-4"> <img id="main-image"
-                                             src="{{ asset($product->primary_image) }}" width="290" /> </div>
+                                             src="{{ asset($product->primary_image) }}" style="width: 80%" /> </div>
                                     <div class="thumbnail text-center">
                                         <img onclick="change_image(this)" src="{{ asset($product->primary_image) }}"
                                             width="70">
