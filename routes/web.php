@@ -9,6 +9,7 @@ use App\Models\ShowCategory;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CheckoutController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,8 @@ use App\Http\Controllers\CheckoutController;
 //     Route::post('update/hero', 'UpdateHero')->name('update_hero');
 // });
 
-Route::middleware(['auth', 'status'])->group( function(){
-    Route::resource(name:'/set_page', controller: HomeViewController::class);
+Route::middleware([ 'status'])->group( function(){
+    Route::resource(name:'set_page', controller: HomeViewController::class);
     Route::resource(name: '/show_category', controller: ShowCategoryController::class);
     Route::resource(name: '/products', controller: ProductController::class);
     // Route::resource(name: '/checkout', controller: CheckoutController::class);
@@ -39,30 +40,22 @@ Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 's
 Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource(name: '/shop', controller: ShopController::class);
 
-
-
-
-// Route::middleware(['auth', 'status'])->group( function(){
-//     Route::resource(name:'/set_page', controller: WelcomeImageController::class);
-// });
-
-
-Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
-
-Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->name('payment');
+//paystack
+Route::get('verify-payment/{reference}', [\App\Http\Controllers\CheckoutController::class, 'verify']);
 
 
 
 
 Route::get('/', function () {
-    return view('main.home');
+
+    return redirect()->route('redirect') ;
 });
 
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
- route::get('/redirect', [HomeController::class, 'redirect']);
+ Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
 
 require __DIR__.'/auth.php';
 

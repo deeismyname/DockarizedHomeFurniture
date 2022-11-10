@@ -1,11 +1,13 @@
 <nav class = "navbar navbar-expand-lg navbar-dark bg-dark py-4 fixed-top">
     <div class = "container">
-        <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "index.html">
-            <img src = "images/shopping-bag-icon.png" style="background-color: white;" alt = "site icon">
-            <span class = "text-uppercase fw-lighter ms-2">Attire</span>
-        </a>
+<div style="text-align: center">
+    <div><img  src = "{{asset('main/img/logo/hflg-t.png')}}" style="width: 5rem !important;" alt = "site icon"></div>
+    <div>Home Furniture</div>
+</div>
+            {{-- <span class = "text-uppercase fw-lighter ms-2">Home Furniture</span> --}}
 
-        <div class = "order-lg-2 nav-btns" style="padding-rigth:5rem !important; ">
+
+        <div class = "order-lg-2 nav-btns" style="padding-rigth:8rem !important; ">
             <button type = "button" class = "btn btn-light position-relative">
                 <i class = "fa fa-search"></i>
             </button>
@@ -23,7 +25,7 @@
         <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
             <ul class = "navbar-nav mx-auto text-center">
                 <li class = "nav-item px-2 py-2">
-                    <a class = "nav-link text-uppercase " href = "#">home</a>
+                    <a class = "nav-link text-uppercase " href = "{{route('redirect')}}">home</a>
                 </li>
                 <li class = "nav-item px-2 py-2">
                     <a class = "nav-link text-uppercase" href = "{{route('shop.index')}}">Shop</a>

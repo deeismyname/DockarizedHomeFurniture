@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Paystack;
+use App\Http\Requests;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 class CheckoutController extends Controller
@@ -13,10 +18,9 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Product $product)
+    public function index()
     {
-        $product = Product::findOrFail($product);
-        return view('main.checkout', compact('product'));
+        //
     }
 
     /**
@@ -37,10 +41,10 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
-   /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
@@ -87,5 +91,34 @@ class CheckoutController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function verify($reference)
+    {
+        $sec = "sk_test_d497c99a59614f65a78e91df74a38c5c6470f785";
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify /$reference",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_SSL_VERIFYHOST =>0,
+            CURLOPT_SSL_VERIFYPEER =>0,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer $sec",
+                "Cache-Control: no-cache",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+
+        return $reference;
     }
 }

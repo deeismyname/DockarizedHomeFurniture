@@ -33,8 +33,11 @@ section{padding: 7rem; width: 100%;}
 
 body{background-color: #000}
 section{padding-top: 4rem; padding-bottom: 7rem;}
+.breadcramp{
+    top: 50rem;
+}
 
-.card{border:none; height: 100vh;}
+.card{border:none;}
 .product{background-color: #eee}
 .brand{font-size: 13px}
 .act-price{color:rgb(11, 9, 9);font-weight: 700}

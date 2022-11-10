@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Categories;
 
 class ShopController extends Controller
 {
@@ -47,8 +48,9 @@ class ShopController extends Controller
      */
     public function show($id)
     {
+        $category = Categories::all();
         $product = Product::find($id);
-        return view('main.product', compact('product'));
+        return view('main.product', compact('product', 'category'));
     }
 
     /**
