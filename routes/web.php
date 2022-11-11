@@ -1,15 +1,15 @@
 <?php
 
+use App\Models\Product;
+use App\Models\ShowCategory;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeImageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\ShowCategoryController;
-use App\Models\ShowCategory;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\CheckoutController;
-use App\Models\Product;
+use App\Http\Controllers\WelcomeImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +36,11 @@ Route::middleware([ 'status'])->group( function(){
     // Route::resource(name: '/shop', controller: ShopController::class);
 });
 // Route::resource(name: '/checkout', controller: CheckoutController::class)->middleware('auth');
-Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware('auth')->name('checkout');
+Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware(['auth'])->name('checkout');
 Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource(name: '/shop', controller: ShopController::class);
+
+
 
 //paystack
 Route::get('verify-payment/{reference}', [\App\Http\Controllers\CheckoutController::class, 'verify']);

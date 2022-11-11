@@ -53,13 +53,13 @@
     <section id="special" class="py-5">
         <div class="container">
             <div class="title text-center py-5">
-                <h2 class="position-relative d-inline-block">Special Selection</h2>
+                <h2 class="position-relative d-inline-block">New Arivals</h2>
             </div>
 
 
             <div class="special-list row g-0">
-                @if ($product->count())
-                    @foreach ($product as $index => $product)
+                @if ($products->count())
+                    @foreach ($products as $index => $product)
                         <div class="col-md-6 col-lg-4 col-xl-3 p-2">
                             <div class="special-img position-relative overflow-hidden">
                                 <img src="{{asset($product->primary_image)}}" class="w-100">
@@ -75,9 +75,14 @@
                             </div>
                         </div>
                     @endforeach
-                @endif
-            </div>
 
+                @endif
+
+            </div>
+            {{-- <div class="mx-auto pb-10 w-4/5">
+               {{$products->links()}}
+
+            </div> --}}
 
 
         </div>

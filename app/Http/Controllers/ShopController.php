@@ -13,11 +13,23 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::all();
-        return view('main.products', compact('product'));
+        // $categories = Categories::all();
+        // $product = Product::all();
+        // return view('main.products', compact('product', 'categories'));
+        if($request->category){
+            $products = Categories::where('category_name', $request->category)->firstOrFail()->products()->paginate(15)->withQueryString();
+        }
+        else{
+            $products = Product::latest()->paginate(15);
+        }
+
+        $categories = Categories::all();
+
+        return view('main.products', compact('products', 'categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('category')->get();
+        $product = Product::with('categories')->get();
         // $category = Categories::with('products')->get();
         return view('admin.all_products', compact('product'));
     }
@@ -66,7 +66,7 @@ class ProductController extends Controller
 
             Product::insert([
                 'name' => $request->name,
-                'category' => $request->category,
+                'categories_id' => $request->category,
                 'price' => $request->price,
                 'description' => $request->description,
                 'status' => $request -> status,
@@ -144,7 +144,7 @@ array_push($insert_array, $save_url);
 
 $request->validate([
     'name' =>  'max:255',
-    'category' => 'max:255',
+    'category_id' => 'max:255',
     'price' =>  'max:255',
     'description' => 'nullable | max:255',
     'status'=> 'max:255',
@@ -160,7 +160,7 @@ $request->validate([
         // $product = Product::find($product->id);
        $product->update ([
         'name' => $request->name,
-        'category' => $request->category,
+        'category_id' => $request->category,
         'price' => $request->price,
         'description' => $request->description,
         'status' => $request -> status,

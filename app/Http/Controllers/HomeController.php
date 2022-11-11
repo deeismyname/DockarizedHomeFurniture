@@ -10,33 +10,19 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    // public function redirect(){
-
-    //     $product = Product::orderBy('id', 'DESC')->get();
-
-    //     $status = Auth::user()->status;
-
-    //    if($status== '1'){
-    //         return view('admin.index');
-    //     }
-    //     else{
-    //         return view('main.home', compact('product'));
-
-    //     }
-    // }
 
     public function redirect(){
-        $product = Product::orderBy('id', 'DESC')->get();
+        $products = Product::orderBy('id', 'DESC')->paginate(4);
 
         if (Auth::guest()) {
-            return view('main.home', compact('product'));
+            return view('main.home', compact('products'));
         } else {
             $status = Auth::user()->status;
             if($status== '1'){
                 return view('admin.index');
             }
             else{
-                return view('main.home', compact('product'));
+                return view('main.home', compact('products'));
 
             }
 
