@@ -4,28 +4,28 @@
     <!-- header -->
     <header id="header" class="vh-100 carousel slide" data-bs-ride="carousel" style="padding-top: 104px;">
         <div class="container h-100 d-flex align-items-center carousel-inner">
-            <div class="text-center carousel-item active">
-                <img src="https://prod-cityfurniture.dotcmscloud.com/dA/da5ff64f-b3f3-49d3-ad9b-34b97c49bc9c" alt="">
+
+            <div class="text-center carousel-item active" style="position: relative">
+                <img src="{{asset('main/img/logo/bgd.png')}}" style="position: relative" alt="">
                 <h2 class="text-capitalize text-white">best collection</h2>
                 <h1 class="text-uppercase py-2 fw-bold text-white">new arrivals</h1>
                 <a href="#" class="btn mt-3 text-uppercase">shop now</a>
             </div>
-            <div class="text-center carousel-item">
-                <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/zara-faux-shearling-chair-1654548559.jpeg?crop=1.00xw:0.668xh;0,0.258xh&resize=480:*"
-                    alt="">
-                <h2 class="text-capitalize text-white">best price & offer</h2>
-                <h1 class="text-uppercase py-2 fw-bold text-white">new season</h1>
-                <a href="#" class="btn  text-uppercase">buy now</a>
-            </div>
+           @if ($heros -> count())
+                @foreach ($heros as $hero)
+                <div class="text-center carousel-item">
+                    <img src="{{asset($hero->image)}}"
+                        alt="">
+                    <h2 class="text-capitalize text-white">best price & offer</h2>
+                    <h1 class="text-uppercase py-2 fw-bold text-white">new season</h1>
 
-            <div class="text-center carousel-item">
-                <img src="https://www.induscraft.com/cache/data/16/PRD28040PRD28040img2331-800x800.jpg" alt="">
-                <h2 class="text-capitalize text-white">best price & offer</h2>
-                <h1 class="text-uppercase py-2 fw-bold text-white">new season</h1>
-                <a href="#" class="btn btn-outline-dark">buy now</a>
-            </div>
-        </div>
-        </div>
+                    <a href="{{route('shop.index')}}" class="btn" >buy now</a>
+                </div>
+                @endforeach
+           @endif
+
+
+
 
         <button class="carousel-control-prev" type="button" style="color: black;" data-bs-target="#header"
             data-bs-slide="prev">
@@ -83,6 +83,10 @@
                {{$products->links()}}
 
             </div> --}}
+
+
+
+
 
 
         </div>
@@ -293,4 +297,7 @@
 
 
 @endsection
+
+
+
 

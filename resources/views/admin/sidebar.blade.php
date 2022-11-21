@@ -23,7 +23,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('set_page.index') }}">Welcome Image</a></li>
-                        <li><a href="{{ route('show_category.index') }}">Display Category</a></li>
+                        <li><a href="{{ route('set_page.create') }}">Add New</a></li>
+                        {{-- <li><a href="{{ route('show_category.index') }}">Add new Image</a></li> --}}
                     </ul>
                 </li>
 

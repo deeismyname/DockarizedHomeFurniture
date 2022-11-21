@@ -7,7 +7,7 @@
             <div class="mb-4 pre">
 
 
-                <h2>Confirm order and pay</h2>
+                <h2>Confirm order and pay</h2> <span></span>
                 <span>Hello {{ $user->name }} please fill the form below to checkout.</span>
             </div>
 
@@ -18,47 +18,6 @@
 
                         <div class="card p-3">
 
-                            {{-- <h6 class="text-uppercase">Payment details</h6>
-                            <div class="inputbox mt-3"> <input type="text" name="name" class="form-control"
-                                    required="required"> <span>Name on card</span> </div>
-
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-
-                                    <div class="inputbox mt-3 mr-2"> <input type="text" name="name"
-                                            class="form-control" required="required"> <i class="fa fa-credit-card"></i>
-                                        <span>Card Number</span>
-
-
-                                    </div>
-
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="d-flex flex-row">
-
-
-                                        <div class="inputbox mt-3 mr-2"> <input type="month" name="expiry"
-                                                class="form-control" required="required" value=""> (Expiry)</div>
-
-                                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name"
-                                                class="form-control" required="required"> <span>CVV</span> </div>
-
-
-                                    </div>
-
-
-                                </div>
-
-
-                            </div> --}}
-
-
-
                             <div class="mt-4 mb-4">
 
                                 <h6 class="text-uppercase">Billing Address</h6>
@@ -68,12 +27,12 @@
 
                                     <div class="col-md-6">
                                         <div class="inputbox mt-3 mr-2"> <input type="text" name="address"
-                                                class="form-control" required="required"> <span>Street Address</span> </div>
+                                                class="form-control" id="street_address" required> <span>Street Address</span> </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inputbox mt-3 mr-2"> <input type="text" name="city"
-                                                class="form-control" required="required"> <span>City</span> </div>
+                                                class="form-control" id="city" required> <span>City / Town</span> </div>
                                     </div>
 
                                 </div>
@@ -83,7 +42,7 @@
                                     <div class="col-md-6">
 
                                         <div class="inputbox mt-3 mr-2">
-                                            <select name="region" id="region" class="form-control" required="required">
+                                            <select name="region" id="region" class="form-control" required>
                                                 <option value="">--Select Region --</option>
                                                 <option value="Ahafo">AHAFO</option>
                                                 <option value="Ashanti">ASHANTI</option>
@@ -110,9 +69,10 @@
                                         <div class="inputbox mt-3 mr-2"> <input type="text" name="locality"
                                                 class="form-control" required="required"> <span>Locality</span> </div>
                                     </div>
-                                    <input type="hidden" name="amount" id="amount" value="{{ $product->price }}">
-                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                    <input type="hidden" name="email" value="{{ $user->email }}" id="email-address">
+                                    <input type="hidden" name="amount" id="amount" value="{{ $product->price }}" required>
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}" id="user_id" required>
+                                    <input type="hidden" name="email" value="{{ $user->email }}" id="email-address" required>
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}" id="product_id" required>
 
                                 </div>
 
@@ -120,13 +80,13 @@
                                     <h5>DELIVERY INFO:</h5>
                                     <div class="col-md-6">
                                         <div class="inputbox mt-3 mr-2"> <input type="text" name="delivery_address"
-                                                class="form-control" required="required"> <span>Deliver Address</span>
+                                                class="form-control" id="delivery_address" required> <span>Deliver Address</span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inputbox mt-3 mr-2"> <input type="text" name="name"
-                                                class="form-control" required="required"> <span>GPS Address</span> </div>
+                                                class="form-control" id="gps" required> <span>GPS Address</span> </div>
                                     </div>
 
                                 </div>
@@ -137,10 +97,11 @@
 
 
                         <div class="mt-4 mb-4 d-flex justify-content-between">
-                            <button class="btn btn-success px-3 pay" onclick="payWithPaystack(event)">Checkout</button>
+                            <button type="submit" class="btn btn-success px-3 pay" onclick="payWithPaystack(event)">Checkout</button>
 
                         </div>
                     </form>
+
 
 
                 </div>
@@ -174,7 +135,7 @@
         </div>
     </div>
 @endsection
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+<script rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="{{ asset('main/assets/css/checkout.css') }}">
 
@@ -191,21 +152,36 @@
             key: 'pk_test_989007f464df9f461740fc76aacd0149bdbd3e62', // Replace with your public key
             email: document.getElementById("email-address").value,
             amount: document.getElementById("amount").value * 100,
-            ref: '' + Math.floor((Math.random() * 1000000000) +
-            1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            currency: "GHS",
+            // user_id: document.getElementById("user_id").value,
+            // city: document.getElementById("city").value,
+            // street_address: document.getElementById("street_address").value,
+            // delivery_address: document.getElementById("delivery_address").value,
+            // gps: document.getElementById("gps").value,
+            // locality: document.getElementById("locality").value,
+
+            // ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
             // label: "Optional string that replaces customer email"
             onClose: function() {
                 alert('Window closed.');
             },
             callback: function(response) {
                 let reference = response.reference;
-
-                s.ajax({
+                //  console.log(reference);
+                $.ajax({
                     type: "GET",
                     url: "{{URL::to('verify-payment')}}/"+reference,
-                    dataType: "dataType",
                     success: function (response) {
-
+                        if(response[0].status==true){
+                            $('form').prepend(`
+                                <h2>${response[0].message}</h2>
+                            `)
+                        } else{
+                            $('form').prepend(`
+                                <h2>Payment Failed</h2>
+                                <a href=""><<button type="submit" class="btn btn-info px-3 >Retry</button>/a>
+                            `)
+                        }
                     }
                 });
             }

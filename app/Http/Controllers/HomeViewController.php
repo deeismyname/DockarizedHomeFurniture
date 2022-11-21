@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use Image;
 use App\Models\WelcomeImage;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class HomeViewController extends Controller
      */
     public function index()
     {
-        $hero = WelcomeImage::find(1);
-        return view('admin.edit.edit_hero', compact('hero'));
+        $hero = WelcomeImage::with('categories')->get();
+        // $category = Categories::with('products')->get();
+        return view('admin.all_hero', compact('hero'));
     }//end of function
 
     /**
@@ -27,7 +29,8 @@ class HomeViewController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::get();
+        return view('admin.edit.create_hero', compact('categories'));
     }
 
     /**
@@ -38,7 +41,26 @@ class HomeViewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
+
+            Image::make($image)->resize(1080,566)->save('upload/hero/'.$name_gen);
+            $save_url = 'upload/hero/'.$name_gen;
+
+            WelcomeImage:: insert([
+                'catchy_title' => $request->catchy_title,
+                'bold_short_Image_detail' => $request->bold_short_Image_detail,
+                'image' => $save_url,
+                'categories_id' =>$request->category
+            ]);
+            $notification = array(
+            'message' => 'Welcome image created with Image Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('set_page.index')->with($notification);
+
+
     }
 
     /**
@@ -60,7 +82,8 @@ class HomeViewController extends Controller
      */
     public function edit($id)
     {
-
+        $hero = WelcomeImage::find($id);
+        return view('admin.edit.edit_hero', compact('hero'));
     }
 
     /**
@@ -86,6 +109,7 @@ class HomeViewController extends Controller
                 'bold_short_Image_detail' => $request->bold_short_Image_detail,
                 'image' => $save_url,
 
+
             ]);
             $notification = array(
             'message' => 'Welcome page Updated with Image Successfully',
@@ -107,7 +131,7 @@ class HomeViewController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('set_page.index')->with($notification);
 
         } // end Else
 

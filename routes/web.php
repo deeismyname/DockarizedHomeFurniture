@@ -43,7 +43,9 @@ Route::resource(name: '/shop', controller: ShopController::class);
 
 
 //paystack
-Route::get('verify-payment/{reference}', [\App\Http\Controllers\CheckoutController::class, 'verify']);
+Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutController::class, 'verify'])->name('verify');
+// Route::post('pay/', [\App\Http\Controllers\CheckoutController::class, 'pay'])->name('pay');
+// Route::get('call_back', [\App\Http\Controllers\CheckoutController::class, 'callback'])->name('back');
 
 
 

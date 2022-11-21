@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Categories extends Model
@@ -16,4 +17,7 @@ class Categories extends Model
         return $this->hasMany(Product::class);
 }
 
+public function heros(){
+    return $this->hasMany(WelcomeImage::class);
+}
 }

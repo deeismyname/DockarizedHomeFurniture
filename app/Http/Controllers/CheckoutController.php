@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Psy\Readline\Hoa\Console;
 
 class CheckoutController extends Controller
 {
@@ -93,12 +94,54 @@ class CheckoutController extends Controller
         //
     }
 
-    public function verify($reference)
+    //public function pay (){
+
+    //     $formData = [
+    //         'email' => request('email'),
+    //         'amount' => request('amount') * 100,
+    //         // 'callback_url' => route('pay.callback')
+    //     ];
+
+    //     $pay = json_decode($this->initiate_payment($formData));
+    //     if ($pay) {
+    //         if ($pay->status) {
+    //              return redirect($pay->data->authorization_url);
+    //             // dd($pay);
+    //         } else {
+    //             return back()->withError($pay->message);
+    //         }
+    //     } else {
+    //         return back()->withError("Something went wrong");
+    //     }
+    // }
+
+    // public function initiate_payment($formData){
+    //     $url = "https://api.paystack.co/transaction/initialize";
+
+    //     $fields_string = http_build_query($formData);
+    //     $ch = curl_init();
+
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_POST, true);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    //         "Authorization: Bearer " . env('PAYSTACK_SECRET_KEY'),
+    //         "Cache-Control: no-cache",
+    //     ));
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    //     $result = curl_exec($ch);
+    //     curl_close($ch);
+
+    //     return $result;
+    // }
+
+    public function verify($refrence)
     {
         $sec = "sk_test_d497c99a59614f65a78e91df74a38c5c6470f785";
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify /$reference",
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$refrence",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -118,7 +161,11 @@ class CheckoutController extends Controller
 
         curl_close($curl);
 
+         $new_data = json_decode($response);
+        // dd($response);
 
-        return $reference;
+        return [$new_data];
+
     }
+
 }

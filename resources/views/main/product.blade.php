@@ -75,17 +75,17 @@
                             </div>
                             <div class=" thumbnail text-center">
                               <img onclick="change_image(this)" src="{{ asset($product->primary_image) }}"
-                              width="150">
+                              width="80">
                           <img onclick="change_image(this)" src="{{ asset($product->image_1) }}"
-                              width="150">
+                              width="80">
                           <img onclick="change_image(this)" src="{{ asset($product->image_2) }}"
-                              width="150">
+                              width="80">
                           <img onclick="change_image(this)" src="{{ asset($product->video_description) }}"
-                              width="150" height="65">
+                              width="80" height="40" style="height: 100% !important;">
                             </div>
 
                         </div>
-                        <div class="details col-md-3">
+                        <div class="details col-lg-3" style="font-size: 1rem">
                             <h3 class="product-title">{{$product->name}}</h3>
                             <div class="rating">
                                 <div class="stars">
@@ -176,10 +176,57 @@ img {
             animation-duration: .3s; }
 
 .card {
-  margin-top: 50px;
+  margin-top: 5rem;
   background: #eee;
-  padding: 3em;
+  /* padding: 3em; */
   line-height: 1.5em; }
+
+  @media screen and (max-width: 1020px) {
+    .thumbnail img{
+        width: 5rem !important;
+
+    }
+    .details{
+        font-size: 1rem !important;
+    }
+    .details h3{
+        font-size: 1rem !important;
+    }
+    .details h4{
+        font-size: 1rem !important;
+    }
+    .details h5{
+        font-size: 1rem !important;
+    }
+    .p-4 img{
+        padding: 0;
+        margin: 0;
+    }
+  }
+
+  @media screen and (max-width: 1280px) {
+    .thumbnail img{
+        width: 5rem !important;
+
+    }
+    .details{
+        font-size: 1rem !important;
+    }
+    .details h3{
+        font-size: 1rem !important;
+    }
+    .details h4{
+        font-size: 1rem !important;
+    }
+    .details h5{
+        font-size: 1rem !important;
+    }
+    .p-4 img{
+        padding: 0;
+        margin: 0;
+    }
+  }
+
 
 @media screen and (min-width: 997px) {
   .wrapper {
@@ -285,6 +332,8 @@ img {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); } }
+
+
 
 /*# sourceMappingURL=style.css.map */
 </style>
