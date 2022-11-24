@@ -10,10 +10,10 @@
         <form action="{{route('search')}}">
 
             <div class = "order-lg-2 nav-btns" style="padding-rigth:8rem !important; ">
-                <button type = "button" class = "btn btn-light position-relative">
+                <button type = "submit" class = "btn btn-light position-relative">
                     <i class = "fa fa-search"></i>
                 </button>
-                <input type="text" placeholder="search">
+                <input type="text" name="query" placeholder="search">
             </div>
         </form>
 

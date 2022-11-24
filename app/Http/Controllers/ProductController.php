@@ -210,10 +210,17 @@ $request->validate([
         return view('main.checkout', compact('product'));
     }
 
-    public function search() {
-        $search_text = $_GET['query'];
-        $products = Product:: where('name', 'LIKE', '%'.$search_text.'%')->with('category')->get();
-        return view('main.products', compact('products'));
+    public function search(Request $request) {
+
+
+        $search_data = Product::where('name', 'like', '%'.$request->input('query').'%')-> get();//firstOrFail()->paginate(15);
+
+
+        $categories = Categories::all();
+
+        return view('main.search', compact('search_data', 'categories'));
+
+
     }
 }
 
