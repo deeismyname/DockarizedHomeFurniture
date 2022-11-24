@@ -172,12 +172,13 @@
                     type: "GET",
                     url: "{{URL::to('verify-payment')}}/"+reference,
                     success: function (response) {
+                        console.log(response);
                         if(response[0].status==true){
                             $('form').prepend(`
                                 <h2>${response[0].message}</h2>
                             `)
                         } else{
-                            $('form').prepend(`
+                            $('form').apend(`
                                 <h2>Payment Failed</h2>
                                 <a href=""><<button type="submit" class="btn btn-info px-3 >Retry</button>/a>
                             `)

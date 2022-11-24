@@ -40,11 +40,12 @@ Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 's
 Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource(name: '/shop', controller: ShopController::class);
 
+Route::get('search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
 
 
 //paystack
 Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutController::class, 'verify'])->name('verify');
-// Route::post('pay/', [\App\Http\Controllers\CheckoutController::class, 'pay'])->name('pay');
+Route::post('order/{response}', [\App\Http\Controllers\CheckoutController::class, 'save_order'])->name('order');
 // Route::get('call_back', [\App\Http\Controllers\CheckoutController::class, 'callback'])->name('back');
 
 

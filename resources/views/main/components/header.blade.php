@@ -7,11 +7,15 @@
             {{-- <span class = "text-uppercase fw-lighter ms-2">Home Furniture</span> --}}
 
 
-        <div class = "order-lg-2 nav-btns" style="padding-rigth:8rem !important; ">
-            <button type = "button" class = "btn btn-light position-relative">
-                <i class = "fa fa-search"></i>
-            </button>
-        </div>
+        <form action="{{route('search')}}">
+
+            <div class = "order-lg-2 nav-btns" style="padding-rigth:8rem !important; ">
+                <button type = "button" class = "btn btn-light position-relative">
+                    <i class = "fa fa-search"></i>
+                </button>
+                <input type="text" placeholder="search">
+            </div>
+        </form>
 
         {{-- login --}}
         <div class = "order-lg-2 nav-btns">
