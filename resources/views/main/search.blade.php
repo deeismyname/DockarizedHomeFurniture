@@ -2,11 +2,18 @@
 
 @section('shop')
 
+
     <section id="collection" class="py-5">
         <div class="container">
-            <div class="title text-center">
-                <h2 class="position-relative d-inline-block">New Collection</h2>
-            </div>
+            {{-- <div class="title text-center">
+                <nav aria-label="breadcrumb" style="padding-top: 10rem!important; background-color:beige">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Seach</li>
+                    </ol>
+                  </nav>
+            </div> --}}
 
             <div class="row g-0" style="padding-top: 5rem !important;">
 
