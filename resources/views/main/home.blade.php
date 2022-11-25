@@ -1,8 +1,11 @@
 @extends('main.master')
 @section('shop')
 
+    @include('main.components.search')
+
+
     <!-- header -->
-    <header id="header" class="vh-100 carousel slide" data-bs-ride="carousel" style="padding-top: 104px;">
+    <header id="header" class="vh-100 carousel slide" data-bs-ride="carousel">
         <div class="container h-100 d-flex align-items-center carousel-inner">
 
             <div class="text-center carousel-item active" style="position: relative">

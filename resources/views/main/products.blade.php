@@ -1,13 +1,11 @@
 @extends('main.master')
 
 @section('shop')
+@include('main.components.search')
 
     <section id="collection" class="py-5">
         <div class="container">
-            <div class="title text-center">
-                <h2 class="position-relative d-inline-block">New Collection</h2>
-            </div>
-
+           
             <div class="row g-0" >
 
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">

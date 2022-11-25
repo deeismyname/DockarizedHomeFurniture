@@ -2,20 +2,11 @@
 
 @section('shop')
 
+@include('main.components.search')
 
     <section id="collection" class="py-5">
         <div class="container">
-            {{-- <div class="title text-center">
-                <nav aria-label="breadcrumb" style="padding-top: 10rem!important; background-color:beige">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Seach</li>
-                    </ol>
-                  </nav>
-            </div> --}}
-
-            <div class="row g-0" style="padding-top: 5rem !important;">
+            <div class="row g-0">
 
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                     <a href="{{route('shop.index')}}"><button type="button" class="btn m-2 text-dark active-filter-btn" data-filter="*">All</button></a>

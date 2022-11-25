@@ -1,18 +1,15 @@
 <div class="header">
     <nav class = "navbar navbar-expand-lg navbar-dark bg-dark py-4 fixed-top">
         <div class = "container">
-    
-                {{-- <span class = "text-uppercase fw-lighter ms-2">Home Furniture</span> --}}
+   <!-- Start Header Logo -->
+   <div class="header-logo">
+    <div style="text-align: center">
+        <div><img  src = "{{asset('main/img/logo/hflg-t.png')}}" style="width: 5rem !important;"  alt = "site icon"></div>
+        <div>Home Furniture</div>
+    </div>
+</div>
+<!-- End Header Logo -->
 
-
-            <form action="{{route('search')}}">
-                <div class = "order-lg-2 nav-btns" style="padding-rigth:8rem !important; ">
-                    <button type = "submit" class = "btn btn-light position-relative">
-                        <i class = "fa fa-search"></i>
-                    </button>
-                    <input type="text" name="query" placeholder="search">
-                </div>
-            </form>
 
             {{-- login --}}
             <div class = "order-lg-2 nav-btns">
@@ -49,7 +46,7 @@
                 </form> --}}
                 @else
                     <a href="{{ route('login') }}"><div style="text-decoration: none">
-                        <button type = "button" class = "btn btn-light position-relative">
+                        <button type = "button" class = "btn btn-light position-relative login">
                         login: <i class = "fas fa-address-card"></i>
                     </button></div>
                 </a>
@@ -91,9 +88,9 @@
 </div>
 
 <style>
-    @media screen and (max-width: 1280px) {
+    @media screen (max-width: 1280px) {
         nav-btns{
-        width: 5rem !important;
+        width: 3rem !important;
 
     }
     .details{
@@ -111,6 +108,10 @@
     .p-4 img{
         padding: 0;
         margin: 0;
+    }
+    .login{
+        max-width: 3rem !important;
+        font-size: 1rem
     }
   }
 
