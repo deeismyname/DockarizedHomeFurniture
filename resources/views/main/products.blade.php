@@ -8,7 +8,7 @@
                 <h2 class="position-relative d-inline-block">New Collection</h2>
             </div>
 
-            <div class="row g-0" style="padding-top: 5rem !important;">
+            <div class="row g-0" >
 
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                     <a href="{{route('shop.index')}}"><button type="button" class="btn m-2 text-dark active-filter-btn" data-filter="*">All</button></a>
