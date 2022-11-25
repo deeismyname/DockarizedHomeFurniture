@@ -21,29 +21,32 @@
                     <button type="button" class="btn header-item waves-effect light" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                            <h6 style="color: whitesmoke"><i class = "fas fa-address-card"></i>   {{Auth::user()->name}}</h6>
+                            <div style="color: whitesmoke; display:flex !important; justify-content:space-between">
+                                <i class = "fas fa-address-card"></i>
+                                <h6 style="padding-left: 0.4rem; padding-right: 0.4rem;">{{Auth::user()->name}}</h6>
+                                <i class="	fa fa-angle-down"></i>
+                            </div>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
-                        <a class="dropdown-item" href=""><i class="ri-user-line align-middle me-1"></i>
+                        <a class="dropdown-item" href="{{route('profile')}}"><i class="fa fa-portrait"></i>
                             Profile</a>
-                        <a class="dropdown-item" href=""><i class="ri-wallet-2-line align-middle me-1"></i> Change Password</a>
-                        <a class="dropdown-item d-block" href="#"><span
-                                class="badge bg-success float-end mt-1">11</span><i
-                                class="ri-settings-2-line align-middle me-1"></i> Settings</a>
+                        <a class="dropdown-item" href=""><i class="fa fa-shopping-cart"></i> My Orders</a>
+
                         <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line align-middle me-1"></i>
                             Lock screen</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href=""><i
-                                class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                        <div class="dropdown-divider "></div>
+
+                        <div class="logout">
+                            <form action="{{route('logout')}}">
+                                <button type="submit" class="btn stn header-item waves-effect light" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" ><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout
+                            </button>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
-
-
-                    {{-- <form action="" method="POST"><div style="text-decoration: none"><button type = "button" class = "btn btn-light position-relative">
-                        logout: <i class = "fas fa-address-card"></i>
-                    </button></div>
-                </form> --}}
                 @else
                     <a href="{{ route('login') }}"><div style="text-decoration: none">
                         <button type = "button" class = "btn btn-light position-relative login">
@@ -111,10 +114,20 @@
     }
     .login{
         max-width: 3rem !important;
-        font-size: 1rem
+        font-size: 1rem;
+
     }
   }
 
+  .stn:hover{
+    background-color: black !important;
+    color: white;
+    padding-left: 1rem;
+}
+.logout{
+    justify-content: center;
+    padding: 0.5rem !important;
+}
 </style>
 
 

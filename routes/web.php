@@ -48,7 +48,9 @@ Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutControlle
 Route::post('order/{response}', [\App\Http\Controllers\CheckoutController::class, 'save_order'])->name('order');
 // Route::get('call_back', [\App\Http\Controllers\CheckoutController::class, 'callback'])->name('back');
 
-
+//profile
+Route::get('profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'show'])->name('profile');
+Route::get('edit_profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('edit_profile');
 
 
 Route::get('/', function () {

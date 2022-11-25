@@ -2,7 +2,7 @@
 
 @section('shop')
 
-@include('main.components.search')
+@include('main.components.search_for_product')
 
 
     <section>
