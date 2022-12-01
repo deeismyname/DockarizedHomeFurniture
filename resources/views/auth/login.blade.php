@@ -78,9 +78,9 @@
         <div class="container">
 
 
-            <div class="row g-7">
+            <div class="g-7 row ">
 
-                <form  class="box" style="top: 50rem" method="POST" action="{{ route('login') }}">
+                <form  class="box" style="top: 50" method="POST" action="{{ route('login') }}">
                     @csrf
                     <h1>Login</h1>
                     <p class="text-muted"> Please enter your login and password!</p>
@@ -106,7 +106,7 @@
                     <input type="submit" name="" value="Login" href="#">
 
                     <div class="col-md-12">
-                        <div class="flex items-center justify-end mt-4">
+                        <div class="flex items-center justify-end mt-4 sm-4">
                             <span>
                                 @if (Route::has('password.request'))
                                 <a class="underline text-sm text-gray-600 hover:text-gray-900 forgot " href="{{ route('password.request') }}">
@@ -144,10 +144,41 @@ body {
 
 }
 
+@media and screen (max-width: 850px){
+    body{
+        background-image: none !important;
+    }
+    .register{
+        font-size: 0.6rem !important;
+    }
+}
+
+@media(max-width: 950px){
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-position: 0;
+
+
+    background-image: url({{asset('main/img/logo/fst.jpg')}}) ;
+
+}
+
+    .card{
+    border:none;
+    max-height: 50vh !important;
+}
+
+}
+
 .card{
    margin-bottom:20px;
     border:none;
-    min-height: 100vh;
+    min-height: 100vh !important;
 }
 
 .box {

@@ -71,7 +71,7 @@ body{
 }
 
 .carousel-inner h1{
-    font-size: 60px;
+    font-size: 4rem;
     font-family: var(--lg-font);
 }
 /* .carousel-item .btn{
@@ -215,3 +215,12 @@ footer a:hover{
         border-bottom: none;
     }
 }
+
+   /* media queries */
+   @media(max-width: 992px){
+    .carousel-inner h1{
+        font-size: 0.8rem;
+        font-family: var(--lg-font);
+    }
+}
+

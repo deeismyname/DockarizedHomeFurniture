@@ -17,26 +17,17 @@ use App\Http\Controllers\OrdersController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
 |
 */
-// Route::resource('admin', MenuController::class);
-
-// Route::controller(WelcomeImageController::class)->group(function () {
-//     Route::get('/admin/edi/edit_hero', 'Hero')->name('edit_hero');
-//     Route::post('update/hero', 'UpdateHero')->name('update_hero');
-// });
 
 Route::middleware([ 'status'])->group( function(){
     Route::resource(name:'set_page', controller: HomeViewController::class);
     Route::resource(name: '/show_category', controller: ShowCategoryController::class);
     Route::resource(name: '/products', controller: ProductController::class);
-    // Route::resource(name: '/checkout', controller: CheckoutController::class);
-    // Route::resource(name: '/shop', controller: ShopController::class);
 });
-// Route::resource(name: '/checkout', controller: CheckoutController::class)->middleware('auth');
+
+
+// checkout
 Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware(['auth'])->name('checkout');
 Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource(name: '/shop', controller: ShopController::class);
