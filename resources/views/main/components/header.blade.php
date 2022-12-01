@@ -1,5 +1,5 @@
 <div class="header">
-    <nav class = "navbar navbar-expand-lg navbar-dark bg-dark py-4 fixed-top">
+    <nav class = "navbar navbar-expand-lg navbar-dark  bg-dark py-4 fixed-top">
         <div class = "container">
    <!-- Start Header Logo -->
    <div class="header-logo">
@@ -23,7 +23,7 @@
 
                             <div style="color: whitesmoke; display:flex !important; justify-content:space-between">
                                 <i class = "fas fa-address-card"></i>
-                                <h6 style="padding-left: 0.4rem; padding-right: 0.4rem;">{{Auth::user()->name}}</h6>
+                                <h6 style="padding-left: 0.6rem; padding-right: 0.6rem;">{{Auth::user()->name}}</h6>
                                 <i class="	fa fa-angle-down"></i>
                             </div>
                     </button>
@@ -91,6 +91,11 @@
 </div>
 
 <style>
+
+    .bg-dark{
+        background-color: rgb(27, 30, 34) !important;
+    }
+
     @media screen (max-width: 1280px) {
         nav-btns{
         width: 3rem !important;

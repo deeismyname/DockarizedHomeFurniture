@@ -14,7 +14,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        return view('main.orders', compact('user'));
     }
 
     /**
@@ -46,7 +47,8 @@ class OrdersController extends Controller
      */
     public function show(Orders $orders)
     {
-        //
+        $user = auth()->user();
+        return view('main.order', compact('user'));
     }
 
     /**

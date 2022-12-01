@@ -10,6 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\ShowCategoryController;
 use App\Http\Controllers\WelcomeImageController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::resource(name: '/shop', controller: ShopController::class);
 
 Route::get('search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
 
+//order
+Route::get('orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders');
+Route::get('order', [\App\Http\Controllers\OrdersController::class, 'show'])->name('order');
 
 //paystack
 Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutController::class, 'verify'])->name('verify');
@@ -49,8 +53,13 @@ Route::post('order/{response}', [\App\Http\Controllers\CheckoutController::class
 // Route::get('call_back', [\App\Http\Controllers\CheckoutController::class, 'callback'])->name('back');
 
 //profile
+Route::middleware(['auth'])->group(function (){
 Route::get('profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'show'])->name('profile');
 Route::get('edit_profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('edit_profile');
+Route::post('update_profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('update_profile');
+Route::get('update_password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit_password'])->name('edit_password');
+Route::post('update_password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_password'])->name('change_password');
+});
 
 
 Route::get('/', function () {

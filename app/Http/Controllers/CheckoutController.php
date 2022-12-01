@@ -94,7 +94,7 @@ class CheckoutController extends Controller
         //
     }
 
-   
+
 
     public function verify($refrence)
     {
@@ -122,7 +122,7 @@ class CheckoutController extends Controller
         curl_close($curl);
 
          $new_data = json_decode($response);
-        // dd($response);
+         dd($response);
 
         return [$new_data];
 

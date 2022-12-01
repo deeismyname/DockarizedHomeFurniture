@@ -18,6 +18,7 @@
         justify-content: center !important;
         display:flex !important;
         max-hieght:20rem !important;
+        position: relative;
 
         padding-top: 10rem !important;
         background-color: rgba(132, 131, 131, 0.1);
