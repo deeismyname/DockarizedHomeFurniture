@@ -18,14 +18,15 @@ class ShopController extends Controller
         // $categories = Categories::all();
         // $product = Product::all();
         // return view('main.products', compact('product', 'categories'));
-        if($request->category){
-            $products = Categories::where('category_name', $request->category)->firstOrFail()->products()->paginate(15)->withQueryString();
-        }
-        else{
-            $products = Product::latest()->paginate(15);
-        }
+        // if($request->category){
+        //     $products = Categories::where('category_name', $request->category)->firstOrFail()->products()->paginate(15)->withQueryString();
+        // }
+        // else{
+        $products = Product::latest()->paginate(15);
+        // }
 
-        $categories = Categories::all();
+        // $categories = Categories::all();
+        $categories = [];
 
         return view('main.products', compact('products', 'categories'));
     }

@@ -28,8 +28,8 @@ use App\Http\Controllers\WelcomeImageController;
 //     Route::post('update/hero', 'UpdateHero')->name('update_hero');
 // });
 
-Route::middleware([ 'status'])->group( function(){
-    Route::resource(name:'set_page', controller: HomeViewController::class);
+Route::middleware(['status'])->group(function () {
+    Route::resource(name: 'set_page', controller: HomeViewController::class);
     Route::resource(name: '/show_category', controller: ShowCategoryController::class);
     Route::resource(name: '/products', controller: ProductController::class);
     // Route::resource(name: '/checkout', controller: CheckoutController::class);
@@ -38,7 +38,7 @@ Route::middleware([ 'status'])->group( function(){
 // Route::resource(name: '/checkout', controller: CheckoutController::class)->middleware('auth');
 Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware(['auth'])->name('checkout');
 Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
-Route::resource(name: '/shop', controller: ShopController::class);
+Route::resource('/shop', ShopController::class);
 
 
 
@@ -52,15 +52,13 @@ Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutControlle
 
 Route::get('/', function () {
 
-    return redirect()->route('redirect') ;
+    return redirect()->route('redirect');
 });
 
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
- Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
+Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
 
-require __DIR__.'/auth.php';
-
-
+require __DIR__ . '/auth.php';
