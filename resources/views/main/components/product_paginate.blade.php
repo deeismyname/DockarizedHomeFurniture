@@ -21,10 +21,10 @@
                 </div>
             </div>
         @endforeach
-        <div class="black" >
+        {{-- <div class="black" >
             {{$products->links()}}
 
-          </div>
+          </div> --}}
     @endif
 </div>
 

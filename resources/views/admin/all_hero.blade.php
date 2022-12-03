@@ -52,7 +52,7 @@
                                                         <a href="{{ route('set_page.show', $hero->id) }}" title="Show"><div class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i> show</div></a><span> . </span>
                                                         <a href="{{ route('set_page.edit', $hero) }}" title="Edit"><div class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> edit</div></a>.
                                                         {{-- @include('menu.order_menu') --}}
-                                                        <form method="post" action="{{route('products.destroy',$hero->id)}}">
+                                                        <form method="post" action="{{route('set_page.destroy', $hero->id)}}">
                                                             @method('delete')
                                                             @csrf
                                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

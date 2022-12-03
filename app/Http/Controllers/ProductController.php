@@ -187,27 +187,7 @@ $request->validate([
 
     return redirect()->back()->with($notification);
 
-    // $request->validate([
 
-    //         'name' => ['required', 'string'],
-    //         'category' => ['required', 'string'],
-    //         'price' => ['required', 'string'],
-    //         'description' => ['required', 'string'],
-    //         'status'=> ['required', 'string'],
-    //         'estimated_delivery_time' => ['required', 'string'],
-    //         'available_quantity'=> ['required', 'number'],
-    //         'colors'=> ['string'],
-    //         'supplier_name'=> ['required', 'string'],
-    //         'supplier_phone' => ['required', 'string'],
-    //         'video_description'=> ['required', 'string'],
-
-
-    // ]);
-
-    // $product->update($request->all() + [ 'primary_image' => $insert_array[0], 'image_1' => $insert_array[1], 'image_2' => $insert_array[2], ]);
-
-    // return redirect()->route('products.index')
-    //                 ->with('success','Product updated successfully');
 }
 
 
@@ -228,6 +208,19 @@ $request->validate([
     public function checkout(Product $product)
     {
         return view('main.checkout', compact('product'));
+    }
+
+    public function search(Request $request) {
+
+
+        $search_data = Product::where('name', 'like', '%'.$request->input('query').'%')-> get();//firstOrFail()->paginate(15);
+
+
+        $categories = Categories::all();
+
+        return view('main.search', compact('search_data', 'categories'));
+
+
     }
 }
 

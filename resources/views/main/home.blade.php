@@ -1,49 +1,10 @@
 @extends('main.master')
 @section('shop')
 
-    <!-- header -->
-    <header id="header" class="vh-100 carousel slide" data-bs-ride="carousel" style="padding-top: 104px;">
-        <div class="container h-100 d-flex align-items-center carousel-inner">
-
-            <div class="text-center carousel-item active" style="position: relative">
-                <img src="{{asset('main/img/logo/bgd.png')}}" style="position: relative" alt="">
-                <h2 class="text-capitalize text-white">best collection</h2>
-                <h1 class="text-uppercase py-2 fw-bold text-white">new arrivals</h1>
-                <a href="#" class="btn mt-3 text-uppercase">shop now</a>
-            </div>
-           @if ($heros -> count())
-                @foreach ($heros as $hero)
-                <div class="text-center carousel-item">
-                    <img src="{{asset($hero->image)}}"
-                        alt="">
-                    <h2 class="text-capitalize text-white">best price & offer</h2>
-                    <h1 class="text-uppercase py-2 fw-bold text-white">new season</h1>
-
-                    <a href="{{route('shop.index')}}" class="btn" >buy now</a>
-                </div>
-                @endforeach
-           @endif
+    @include('main.components.search_for_product')
 
 
-
-
-        <button class="carousel-control-prev" type="button" style="color: black;" data-bs-target="#header"
-            data-bs-slide="prev">
-            <div class="controls" style="display: block;">
-                <div class="carousel-control-prev-icon" style="background-color: black;"></div>
-                <div>previous</div>
-            </div>
-        </button>
-        <button class="carousel-control-next" type="button" style="color: black;" data-bs-target="#header"
-            data-bs-slide="next">
-            <div class="controls" style="display: block;">
-                <div class="carousel-control-next-icon" style="background-color: black;"></div>
-                <div>next</div>
-            </div>
-
-        </button>
-    </header>
-    <!-- end of header -->
+    @include('main.components.carousel')
 
     <!-- collection -->
 
@@ -109,7 +70,7 @@
     <!-- end of blogs -->
 
     <!-- blogs -->
-    <section id="blogs" class="py-5">
+    {{-- <section id="blogs" class="py-5">
         <div class="container">
             <div class="title text-center py-5">
                 <h2 class="position-relative d-inline-block">Our Latest Blog</h2>
@@ -165,11 +126,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end of blogs -->
 
     <!-- about us -->
-    <section id="about" class="py-5">
+    {{-- <section id="about" class="py-5">
         <div class="container">
             <div class="row gy-lg-5 align-items-center">
                 <div class="col-lg-6 order-lg-1 text-center text-lg-start">
@@ -186,11 +147,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end of about us -->
 
     <!-- popular -->
-    <section id="popular" class="py-5">
+    {{-- <section id="popular" class="py-5">
         <div class="container">
             <div class="title text-center pt-3 pb-5">
                 <h2 class="position-relative d-inline-block ms-4">Popular Of This Year</h2>
@@ -273,11 +234,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end of popular -->
 
     <!-- newsletter -->
-    <section id="newsletter" class="py-5">
+    {{-- <section id="newsletter" class="py-5">
         <div class="container">
             <div class="d-flex flex-column align-items-center justify-content-center">
                 <div class="title text-center pt-3 pb-5">
@@ -292,7 +253,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end of newsletter -->
 
 

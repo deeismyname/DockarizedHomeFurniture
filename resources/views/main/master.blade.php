@@ -12,16 +12,20 @@
     <!-- custom css -->
     <link rel = "stylesheet" href = "{{asset('main/assets/css/main.css')}}">
 </head>
-<body>
+<body  style="min-height: 100vh !important; display:block !important; flex-direction:column ">
 
     <!-- navbar -->
     @include('main.components.header')
     <!-- end of navbar -->
 
-   @yield('shop')
+  <div style="min-height: 100vh">
+    @yield('shop')
+  </div>
 
     <!-- footer -->
-    @include('main.components.footer')
+    <div class="footer" style="margin-top: auto">
+        @include('main.components.footer')
+    </div>
     <!-- end of footer -->
 
 

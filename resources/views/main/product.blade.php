@@ -2,65 +2,10 @@
 
 @section('shop')
 
+@include('main.components.search_for_product')
 
 
     <section>
-        {{-- <div class="container mt-5 mb-12">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="images p-3">
-                                    <div class="text-center p-4"> <img id="main-image"
-                                             src="{{ asset($product->primary_image) }}" style="width: 80%" /> </div>
-                                    <div class="thumbnail text-center">
-                                        <img onclick="change_image(this)" src="{{ asset($product->primary_image) }}"
-                                            width="70">
-                                        <img onclick="change_image(this)" src="{{ asset($product->image_1) }}"
-                                            width="70">
-                                        <img onclick="change_image(this)" src="{{ asset($product->image_2) }}"
-                                            width="70">
-                                        <img onclick="change_image(this)" src="{{ asset($product->video_description) }}"
-                                            width="70">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="product p-4  justify-content-between align-items-center">
-
-                                    <div class="mt-4 mb-3 ">
-
-                                       <h3 class="text-to-upper">{{ $product->name }}</h3>
-
-                                       <span class="act-price">Gh₵
-                                                {{ $product->price }}.00</span>
-
-                                    </div>
-                                    <div class="cart mt-4 align-items-center">
-                                        <a href="{{ route('checkout', $product->id)}}"><button class="btn btn-danger text-uppercase mr-2 px-4">Buy Now</button></a>
-                                        <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button>
-                                    </div>
-                                    <span><h5>Product Details:</h5></span> <span> <p class="about">des</p></span>
-
-
-                                    <div class="cart mt-4 align-items-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="product__details__breadcrumb">
-                    <a href="./index.html">Home</a>
-                    <a href="./shop.html">Shop</a>
-                    <span>Product Details</span>
-                </div>
-            </div>
-        </div>
         <div class="container">
             <div class="card">
                 <div class="container-fliud">

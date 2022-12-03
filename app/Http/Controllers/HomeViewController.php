@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
 use Image;
+use App\Models\Categories;
 use App\Models\WelcomeImage;
 use Illuminate\Http\Request;
 
@@ -44,7 +44,7 @@ class HomeViewController extends Controller
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();  // 3434343443.jpg
 
-            Image::make($image)->resize(1080,566)->save('upload/hero/'.$name_gen);
+            Image::make($image)->resize(1920, 800)->save('upload/hero/'.$name_gen);
             $save_url = 'upload/hero/'.$name_gen;
 
             WelcomeImage:: insert([
@@ -186,8 +186,11 @@ class HomeViewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        WelcomeImage::findOrFail($request->id)->delete();
+
+        return redirect()->back()->with('success','Welcome Image deleted successfully');
     }
 }

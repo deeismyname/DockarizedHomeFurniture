@@ -40,7 +40,7 @@
                         class="col-sm-2 col-form-label">Category</label>
                     <div class="col-sm-6">
                         <select name="category" class="form-control" type="text" value="" id="example-text-input">
-                            <option value="" style="text-align: center">--Select a category--</option>
+                            <option value="" style="text-align: center"> --Select a category-- </option>
                             @if ($categories -> count())
                                 @foreach ($categories as $index => $category)
                                 <option value="{{$category->id}}" style="text-align: center">{{$category->category_name}}</option>
