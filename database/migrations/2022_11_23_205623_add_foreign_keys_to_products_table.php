@@ -14,7 +14,7 @@ class AddForeignKeysToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->foreign(['categories_id'], 'products_relation_1')->references(['id'])->on('categories')->onUpdate('SET DEFAULT')->onDelete('SET NULL');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
@@ -26,7 +26,7 @@ class AddForeignKeysToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign('products_relation_1');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 }

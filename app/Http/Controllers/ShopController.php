@@ -25,8 +25,8 @@ class ShopController extends Controller
         $products = Product::latest()->paginate(15);
         // }
 
-        // $categories = Categories::all();
-        $categories = [];
+        $categories = Categories::all();
+        // $categories = [];
 
         return view('main.products', compact('products', 'categories'));
     }

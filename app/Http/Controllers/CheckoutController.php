@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\Orders;
 use Psy\Readline\Hoa\Console;
 
 class CheckoutController extends Controller
@@ -57,7 +58,10 @@ class CheckoutController extends Controller
         $user = auth()->user();
 
         $product = Product::findOrFail($id);
-        return view('main.checkout', compact('product', 'user', 'date'));
+        $order = new Orders();
+        $order->product_id = $product->id;
+        $order->save();
+        return view('main.checkout', compact('product', 'user', 'date', 'order'));
     }
 
     /**
@@ -105,8 +109,8 @@ class CheckoutController extends Controller
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_SSL_VERIFYHOST =>0,
-            CURLOPT_SSL_VERIFYPEER =>0,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
@@ -121,12 +125,9 @@ class CheckoutController extends Controller
 
         curl_close($curl);
 
-         $new_data = json_decode($response);
-         dd($response);
+        $new_data = json_decode($response);
+        dd($new_data);
 
         return [$new_data];
-
-
     }
-
 }
