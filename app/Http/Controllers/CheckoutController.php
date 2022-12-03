@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Paystack;
-use App\Http\Requests;
 use App\Models\Product;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Orders;
-use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Auth;
+use Paystack;
 
 class CheckoutController extends Controller
 {
@@ -55,13 +52,15 @@ class CheckoutController extends Controller
     public function show($id)
     {
         $date = date('d-m-Y H:i:s');
-        $user = auth()->user();
-
         $product = Product::findOrFail($id);
+
+        // init an empty order with the product id and user id
         $order = new Orders();
+        $order->user_id = Auth::user()->id;
         $order->product_id = $product->id;
         $order->save();
-        return view('main.checkout', compact('product', 'user', 'date', 'order'));
+
+        return view('main.checkout', compact('product', 'date', 'order'));
     }
 
     /**
@@ -100,34 +99,84 @@ class CheckoutController extends Controller
 
 
 
-    public function verify($refrence)
+    // public function verify($refrence)
+    // {
+    //     $sec = "sk_test_d497c99a59614f65a78e91df74a38c5c6470f785";
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, array(
+    //         CURLOPT_URL => "https://api.paystack.co/transaction/verify/$refrence",
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => "",
+    //         CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_SSL_VERIFYHOST => 0,
+    //         CURLOPT_SSL_VERIFYPEER => 0,
+    //         CURLOPT_TIMEOUT => 30,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => "GET",
+    //         CURLOPT_HTTPHEADER => array(
+    //             "Authorization: Bearer $sec",
+    //             "Cache-Control: no-cache",
+    //         ),
+    //     ));
+
+    //     $response = curl_exec($curl);
+    //     $err = curl_error($curl);
+
+    //     curl_close($curl);
+
+    //     $new_data = json_decode($response);
+    //     dd($new_data);
+
+    //     return [$new_data];
+    // }
+
+
+    /**
+     * Redirect the User to Paystack Payment Page
+     * @return Url
+     */
+    public function redirectToGateway(Request $request)
     {
-        $sec = "sk_test_d497c99a59614f65a78e91df74a38c5c6470f785";
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$refrence",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer $sec",
-                "Cache-Control: no-cache",
-            ),
-        ));
+        $order = Orders::findOrFail($request->order_id);
+        try {
+            $order->payment_reference = $request->reference;
+            $order->street_address = $request->address;
+            $order->city_town = $request->city;
+            $order->region = $request->region;
+            $order->locality = $request->locality;
+            $order->delivery_address = $request->delivery_address;
+            $order->gps_address = $request->gps_address;
+            $order->save();
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+            return Paystack::getAuthorizationUrl()->redirectNow();
+        } catch (\Exception $e) {
+            $order->delete();
+            // dd($e);
+            return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
+        }
+    }
 
-        curl_close($curl);
+    /**
+     * Obtain Paystack payment information
+     * @return void
+     */
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
 
-        $new_data = json_decode($response);
-        dd($new_data);
+        $order = Orders::where('payment_reference', $paymentDetails['data']['reference'])->first();
+        if ($paymentDetails['status']) {
+            $order->total = ($paymentDetails['data']['amount'] / 100);
+            $order->status = "paid";
+            $order->save();
+            return redirect()->route('thankyou', [$order->id]);
+        }
+    }
 
-        return [$new_data];
+    public function thankyou($order_id)
+    {
+        $order = Orders::findOrFail($order_id);
+
+        return view('main.thankyou', compact('order'));
     }
 }

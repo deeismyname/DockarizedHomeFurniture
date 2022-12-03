@@ -8,7 +8,7 @@
 
 
             <h2>Confirm order and pay</h2> <span></span>
-            <span>Hello {{ $user->name }} please fill the form below to checkout.</span>
+            <span>Hello {{ Auth::user()->name }} please fill the form below to checkout.</span>
         </div>
 
         <div class="row">
@@ -19,10 +19,10 @@
                     @csrf
 
                     <input type="hidden" name="amount" id="amount" value="{{ $product->price * 100 }}" required>
-                    <input type="hidden" name="user_id" value="{{ $user->id }}" id="user_id" required>
-                    <input type="hidden" name="email" value="{{ $user->email }}" id="email-address">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="user_id" required>
+                    <input type="hidden" name="email" value="{{ Auth::user()->email }}" id="email-address">
                     <input type="hidden" name="product_id" value="{{ $product->id }}" id="product_id" required>
-                    <!-- <input type="hidden" name="quantity" value="1"> -->
+                    <input type="hidden" name="order_id" value="{{$order->id}}">
                     <input type="hidden" name="currency" value="GHS">
                     <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
 
@@ -94,8 +94,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control"
-                                            id="gps" required> <span>GPS Address</span> </div>
+                                    <div class="inputbox mt-3 mr-2"> <input type="text" name="gps_address"
+                                            class="form-control" id="gps" required> <span>GPS Address</span> </div>
                                 </div>
 
                             </div>
@@ -147,48 +147,3 @@
 <script rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="{{ asset('main/assets/css/checkout.css') }}">
-
-<script src="https://js.paystack.co/v1/inline.js"></script>
-
-<script>
-const paymentForm = document.getElementById('paymentForm');
-paymentForm.addEventListener("submit", payWithPaystack, false);
-
-function payWithPaystack(e) {
-    e.preventDefault();
-
-    let handler = PaystackPop.setup({
-        key: 'pk_test_989007f464df9f461740fc76aacd0149bdbd3e62', // Replace with your public key
-        email: document.getElementById("email-address").value,
-        amount: document.getElementById("amount").value * 100,
-        currency: "GHS",
-
-        onClose: function() {
-            alert('Window closed.');
-        },
-        callback: function(response) {
-            let reference = response.reference;
-            //  console.log(reference);
-            $.ajax({
-                type: "GET",
-                url: "{{URL::to('verify-payment')}}/" + reference,
-                success: function(response) {
-                    console.log(response);
-                    if (response[0].status == true) {
-                        $('form').prepend(`
-                                <h2>${response[0].message}</h2>
-                            `)
-                    } else {
-                        $('form').apend(`
-                                <h2>Payment Failed</h2>
-                                <a href=""><<button type="submit" class="btn btn-info px-3 >Retry</button>/a>
-                            `)
-                    }
-                }
-            });
-        }
-    });
-
-    handler.openIframe();
-}
-</script>

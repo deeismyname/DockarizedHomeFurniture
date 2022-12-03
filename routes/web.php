@@ -11,7 +11,6 @@ use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\ShowCategoryController;
 use App\Http\Controllers\WelcomeImageController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,33 +27,34 @@ Route::middleware(['status'])->group(function () {
 });
 
 
-// checkout
-Route::get('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'show'])->middleware(['auth'])->name('checkout');
-Route::post('checkout/{id}', [\App\Http\Controllers\CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
 Route::resource('/shop', ShopController::class);
+Route::get('search', [ProductController::class, 'search'])->name('search');
 
-Route::get('search', [\App\Http\Controllers\ProductController::class, 'search'])->name('search');
-
-//order
-Route::get('orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders');
-Route::get('order', [\App\Http\Controllers\OrdersController::class, 'show'])->name('order');
-
-//paystack
-Route::get('/application/payment', [PaymentController::class, 'index'])->name('payment');
-Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
-Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
-
-// Route::get('verify-payment/{refrence}', [\App\Http\Controllers\CheckoutController::class, 'verify'])->name('verify');
-// Route::post('order/{response}', [\App\Http\Controllers\CheckoutController::class, 'save_order'])->name('order');
-// Route::get('call_back', [\App\Http\Controllers\CheckoutController::class, 'callback'])->name('back');
 
 //profile
 Route::middleware(['auth'])->group(function () {
-    Route::get('profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'show'])->name('profile');
-    Route::get('edit_profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit'])->name('edit_profile');
-    Route::post('update_profile', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update'])->name('update_profile');
-    Route::get('update_password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'edit_password'])->name('edit_password');
-    Route::post('update_password', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'update_password'])->name('change_password');
+
+    //order
+    Route::get('orders', [OrdersController::class, 'index'])->name('orders');
+    Route::get('order', [OrdersController::class, 'show'])->name('order');
+
+    // checkout
+    Route::get('checkout/{id}', [CheckoutController::class, 'show'])->middleware(['auth'])->name('checkout');
+    Route::post('checkout/{id}', [CheckoutController::class, 'store'])->middleware('auth')->name('confirm');
+
+    // user has to be authenticated before can make payments
+    //paystack
+    Route::post('/pay', [CheckoutController::class, 'redirectToGateway'])->name('pay');
+    Route::get('/payment/callback', [CheckoutController::class, 'handleGatewayCallback']);
+    Route::get('/payment/{order_id}/thankyou/', [CheckoutController::class, 'thankyou'])->name('thankyou');
+
+
+    // Profiles
+    Route::get('profile', [Auth\RegisteredUserController::class, 'show'])->name('profile');
+    Route::get('edit_profile', [Auth\RegisteredUserController::class, 'edit'])->name('edit_profile');
+    Route::post('update_profile', [Auth\RegisteredUserController::class, 'update'])->name('update_profile');
+    Route::get('update_password', [Auth\RegisteredUserController::class, 'edit_password'])->name('edit_password');
+    Route::post('update_password', [Auth\RegisteredUserController::class, 'update_password'])->name('change_password');
 });
 
 
