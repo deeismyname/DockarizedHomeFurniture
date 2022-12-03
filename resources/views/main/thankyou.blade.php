@@ -42,7 +42,7 @@
                             </tr>
                             <tr>
                                 <td>Date</td>
-                                <td colspan="2">{{$order->updated_at->format('D d M Y g:i A')}}</td>
+                                <td colspan="2">{{$order->updated_at->format('D, d M Y g:i A')}}</td>
                             </tr>
                         </tbody>
                     </table>
