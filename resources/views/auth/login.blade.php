@@ -106,7 +106,7 @@
                     <input type="submit" name="" value="Login" href="#">
 
                     <div class="col-md-12">
-                        <div class="flex items-center justify-end mt-4 sm-4">
+                        <div class="flex items-center justify-end mt-2 option">
                             <span>
                                 @if (Route::has('password.request'))
                                 <a class="underline text-sm text-gray-600 hover:text-gray-900 forgot " href="{{ route('password.request') }}">
@@ -271,5 +271,9 @@ body {
    border: solid 5px rgb(255, 255, 255);
    border-radius: 5px;
 }
-
+@media(max-width: 480px){
+    .option{
+        font-size: 0.7rem !important;
+    }
+}
 </style>

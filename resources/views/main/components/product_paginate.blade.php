@@ -29,7 +29,7 @@
 </div>
 
 @push('scripts')
-   {{-- <script>
+ {{-- <script>
         $(document).ready(function(){
 
         })

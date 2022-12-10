@@ -53,17 +53,17 @@ class RegisteredUserController extends Controller
     }
 
     public function show(){
-        $user = auth()->user();
+        $user = Auth()->user();
         return view('main.profile', compact('user'));
     }
 
     public function edit() {
-        $user = auth()->user();
+        $user = Auth()->user();
         return view('main.edit_profile', compact('user'));
     }
 
     public function update (Request $request){
-        $user = auth()->user();
+        $user = Auth()->user();
 
         $request->validate([
             'name' => ['string', 'max:255'],
@@ -76,27 +76,10 @@ class RegisteredUserController extends Controller
         ]);
     }
 
-    // public function update_password (Request $request) {
 
-    //     $validateData = $request->validate([
-    //         'oldpassword' => 'required',
-    //         'password' => 'required|confirmed'
-    //     ]);
-
-    //     $hashedPassword = Auth::user()->password;
-    //     if(Hash::check($request->oldpassword, $hashedPassword)){
-    //         $user =User::find(Auth::id());
-    //         $user->password = Hash::make($request->password);
-    //         $user->save();
-    //         Auth::logout();
-    //         return redirect()->route('login')->with('success', 'Password has been changed successfuly');
-    //     }else{
-    //         return redirect()->back()->with('error', 'Something went wrong. Please try again');
-    //     }
-    // }
 
      public function edit_password(){
-         $user = auth()->user();
+         $user = Auth()->user();
          return view('main.change_password', compact('user'));
      }
 
