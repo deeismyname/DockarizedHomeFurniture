@@ -1,12 +1,14 @@
 @extends('main.master')
 
 @section('shop')
-@include('main.components.search_for_product')
 
     <section id="collection" class="py-5">
         <div class="container">
+            <div class="title text-center">
+                <h2 class="position-relative d-inline-block">New Collection</h2>
+            </div>
 
-            <div class="row g-0" >
+            <div class="row g-0">
 
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                     <a href="{{route('shop.index')}}"><button type="button" class="btn m-2 text-dark active-filter-btn" data-filter="*">All</button></a>
@@ -14,12 +16,12 @@
 
                         @if ($categories->count())
                             @foreach ($categories as $index => $category)
-                                <a href="{{route('shop.index',['category' =>$category->category_name])}}"><button type="button" class="btn m-2 text-dark"
-                                    data-filter=".{{ $category->category_name }}">{{ $category->category_name }}</button>
+                                <a href="{{route('shop.index', ['category' =>$category->category_name])}}"><button type="button" class="btn m-2 text-dark"
+                                    data-filter=".{{ $category->id }}">{{ $category->category_name }}</button>
                                 </a>
                             @endforeach
                         @endif
-
+ {{-- {{dd($category->id)}} --}}
                 </div>
 
                 @include('main.components.product_paginate')
@@ -35,7 +37,6 @@
     .card {
         position: relative;
     }
-
     .more {
         top: 1rem;
         right: 1rem;
