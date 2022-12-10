@@ -25,6 +25,8 @@ class ShopController extends Controller
         $categories = Categories::all();
 
         return view('main.products', compact('products', 'categories'));
+        //super works well
+    
     }
 
 
