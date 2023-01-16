@@ -17,7 +17,7 @@
                         <i class="fas fa-arrow-alt-circle-left"></i> profile
                       </button>
                   </a>
-                  
+
               </div>
               <div class="ms-3" style="margin-top: 130px;">
                 <h2>{{$user->name}}</h2>
@@ -51,32 +51,22 @@
 
 
               <div class="row g-2">
-                <div class="col">
-                  <div class="image">
-                    <img src="{{asset('upload/products/237168031d88451c78fd8d6d6378c0b2.jpeg')}}"
-                    alt="image 1" class="w-100 rounded-3">
-                  </div>
-                  <div class="info" style="background-color: #f8f9fa; padding: 3rem!important;">
-                    <h6>Product Name: Outdoor/Garden Sofa</h6>
-                    <p>Status: Pending shipmen</p>
-                    <p>Estimated delivery time: 3 days</p>
-                  </div>
-                </div>
-                <div class="col mb-2">
-                  <div>
-                    <img src="{{asset('upload/products/13403518ef9c1ce843a289d991f79bf5.jpg')}}"
-                    alt="image 1" class="w-100 rounded-3">
-                 </div>
-                 <div class="info" style="background-color: #f8f9fa; padding: 3rem!important;">
-                        <h6>Product Name: Outdoor/Garden Sofa</h6>
-                        <p>Status: Pending shipmen</p>
-                        <p>Estimated delivery time: 3 days</p>
-                 </div>
+                @foreach ($orders as $order)
+                <div class="col-sm-4">
+                    <div class="image">
+                      <img src="{{asset($order->productOrdered->primary_image)}}"
+                      alt="image 1" class="w-100 rounded-3">
                     </div>
-                </div>
+                    <div class="info" style="background-color: #f8f9fa; padding: 3rem!important;">
+                      <h6>Product Name: {{$order->productOrdered->name}}</h6>
+                      <p>Status: {{$order->status}}</p>
+                      <p>Estimated delivery time: {{$order->productOrdered->estimated_delivery_time}}</p>
+                    </div>
+                  </div>
+                @endforeach
               </div>
 
-
+{{--
               -- <div class="row g-2">
                 <div class="col">
                   <div>
@@ -103,7 +93,7 @@
                         <p>Estimated delivery time: 3 days</p>
                     </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

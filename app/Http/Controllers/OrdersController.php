@@ -15,7 +15,10 @@ class OrdersController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('main.orders', compact('user'));
+        $user_id = $user->id;
+        $orders = Orders::with('productOrdered')->orderBy('orders.created_at', 'desc')->where('user_id', $user_id)->get();
+        //  dd($orders);
+        return view('main.orders', compact('user', 'orders'));
     }
 
     /**
@@ -48,6 +51,8 @@ class OrdersController extends Controller
     public function show(Orders $orders)
     {
         $user = auth()->user();
+
+
         return view('main.order', compact('user'));
     }
 
@@ -83,5 +88,9 @@ class OrdersController extends Controller
     public function destroy(Orders $orders)
     {
         //
+    }
+
+    public function fetchOrder() {
+
     }
 }

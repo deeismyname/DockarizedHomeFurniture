@@ -41,7 +41,7 @@
                                                 <td>{{ $product->id }}</td>
                                                 <td>{{ $product->name }}</td>
                                                 <td>Gh₵ {{ $product->price }}.00</td>
-                                                <td>{{ $product->category }}</td>
+                                                <td>{{ $product->categories->category_name}}</td>
                                                 <td>{{ $product->status }}</td>
                                                 <td>{{ $product->available_quantity }} Units</td>
                                                 {{-- <td>

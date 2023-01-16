@@ -100,7 +100,7 @@
 
                         <div class="col" style="padding-right: 2rem">
                              <span style="right: 0rem">
-                                <a href="{{route('edi')}}">
+                                <a href="{{route('edit_profile')}}">
                                     <button class="btn btn-danger text-uppercase mr-2 px-4 edit" style="z-index: 1;">
                                         <i class="fas fa-pen"></i> reset
                                     </button>
