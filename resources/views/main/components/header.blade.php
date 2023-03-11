@@ -38,14 +38,8 @@
                         <div class="dropdown-divider "></div>
 
                         <div class="logout">
-                            {{-- <form action="{{route('logout')}}">
-                                <button type="submit" class="btn stn header-item waves-effect light" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" ><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout
-                            </button>
-
-                            </form> --}}
-
-                            <a  class="btn" href="{{url('/logout')}}"><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout</a>
+                            
+                            <a  class="btn" href="{{route('logout')}}"><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout</a>
                         </div>
                     </div>
                 </div>

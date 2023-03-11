@@ -13,6 +13,7 @@ use App\Http\Controllers\WelcomeImageController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\passwordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +55,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [RegisteredUserController::class, 'show'])->name('profile');
     Route::get('edit_profile', [RegisteredUserController::class, 'edit'])->name('edit_profile');
     Route::post('update_profile', [RegisteredUserController::class, 'update'])->name('update_profile');
-    Route::get('update_password', [RegisteredUserController::class, 'edit_password'])->name('edit_password');
-    Route::post('update_password', [RegisteredUserController::class, 'update_password'])->name('change_password');
+    Route::get('update_password', [passwordResetController::class, 'index'])->name('edit_password');
+    Route::post('update_password', [passwordResetController::class, 'changePassword'])->name('change_password');
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 });
 

@@ -3,9 +3,11 @@
 
     <section class="gradient-custom-2">
         <div class="container py-4">
-            @if (session('message'))
+            {{-- @if (session('message'))
                 <h5 class="alert alert-success mb-2">{{ session('message') }}</h5>
             @endif
+
+
 
             @if ($errors->any())
                 <ul class="alert alert-danger">
@@ -13,7 +15,7 @@
                         <li class="text-danger">{{ $error }}</li>
                     @endforeach
                 </ul>
-            @endif
+            @endif --}}
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col col-lg-12 col-xl-12" style="padding-top: 8rem !important;">
                     <div class="card">
@@ -66,6 +68,27 @@
                             <div id="collection" class="py-5">
                                 <div class="container">
 
+                                    <div class="message">
+                                        @if (session('message'))
+                                            <h5 class="alert alert-success mb-2">{{ session('message') }}</h5>
+                                        @endif
+
+
+
+                                        @if ($errors->any())
+                                            <ul class="alert alert-danger">
+                                                @foreach ($errors->all() as $error)
+                                                    <li class="text-danger">{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </div>
+                                    <div class="mm">
+                                        @include('flash-message')
+
+
+                                        @yield('content')
+                                    </div>
 
                                     <div class="row g-7">
 
@@ -76,26 +99,25 @@
                                                 <label class="font-italic mb-1" style="padding: 1rem">Enter Old Password:
                                                 </label>
                                                 <span><input id="password" class="block mt-1 w-full" type="password"
-                                                        name="oldpassword" required /></span>
+                                                        name="current_password" required /></span>
                                             </div>
 
                                             <div>
                                                 <label class="font-italic mb-1" style="padding: 1rem">Enter New Password:
                                                 </label>
                                                 <span><input id="password" class="block mt-1 w-full" type="password"
-                                                        name="newpassword" required /></span>
+                                                        name="password" required /></span>
                                             </div>
 
                                             <div>
                                                 <label class="font-italic mb-1" style="padding: 1rem">Confirm New Password:
                                                 </label>
                                                 <span><input id="password" class="block mt-1 w-full" type="password"
-                                                        name="confirm" required /></span>
+                                                        name="password" required /></span>
                                             </div>
 
                                             <div class="button">
-                                                <button type="submit"
-                                                    class="btn btn-danger text-uppercase mr-2 px-4">reset
+                                                <button type="submit" class="btn btn-danger text-uppercase mr-2 px-4">reset
                                                 </button>
                                             </div>
 
@@ -111,6 +133,7 @@
 
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- end of newsletter -->

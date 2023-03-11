@@ -19,7 +19,7 @@
     <!-- end of navbar -->
 
   <div style="min-height: 100vh">
-    @yield('shop')
+        @yield('shop')
   </div>
 
     <!-- footer -->
