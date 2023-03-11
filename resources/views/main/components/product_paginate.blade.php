@@ -18,7 +18,9 @@
                     <h6 class="text-capitalize my-1">{{ $product->name }}</h6>
                     </p>
                     <span class="fw-bold">Gh₵ {{ $product->price }}.00</span>
+                    <div class="view"><a href="{{route('shop.show', $product->id)}}" class="btn btn-primary mt-3">View Product</a></div>
                 </div>
+
             </div>
         @endforeach
         {{-- <div class="black" >

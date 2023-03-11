@@ -12,6 +12,7 @@ use App\Http\Controllers\ShowCategoryController;
 use App\Http\Controllers\WelcomeImageController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
 
 Route::get('/', function () {

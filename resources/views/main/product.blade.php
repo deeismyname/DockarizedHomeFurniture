@@ -39,7 +39,7 @@
                                 <span class="review-no">41 reviews</span>
                             </div>
                             <div>
-                                <p class="product-description">{{ $product->description }}</p>
+                                <p class="product-description">{!! $product->description !!}</p>
                             </div>
                             <h4 class="price">price: Gh₵<span>{{ $product->price }}</span></h4>
                             <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87

@@ -4,7 +4,7 @@
    <!-- Start Header Logo -->
    <div class="header-logo">
     <div style="text-align: center">
-        <div><img  src = "{{asset('main/img/logo/hflg-t.png')}}" style="width: 5rem !important;"  alt = "site icon"></div>
+        <div><a href="{{route('redirect')}}"><img  src = "{{asset('main/img/logo/hflg-t.png')}}" style="width: 5rem !important;"  alt = "site icon"></a></div>
         <div>Home Furniture</div>
     </div>
 </div>
@@ -38,12 +38,14 @@
                         <div class="dropdown-divider "></div>
 
                         <div class="logout">
-                            <form action="{{route('logout')}}">
+                            {{-- <form action="{{route('logout')}}">
                                 <button type="submit" class="btn stn header-item waves-effect light" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" ><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout
                             </button>
 
-                            </form>
+                            </form> --}}
+
+                            <a  class="btn" href="{{url('/logout')}}"><i class="fa fa-sharp fa-solid fa-power-off text-danger"></i> Logout</a>
                         </div>
                     </div>
                 </div>
@@ -132,6 +134,10 @@
 .logout{
     justify-content: center;
     padding: 0.5rem !important;
+}
+
+.btn:hover{
+    color:aliceblue !important;
 }
 </style>
 

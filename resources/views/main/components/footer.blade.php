@@ -10,13 +10,13 @@
                 <h5 class = "fw-light">Links</h5>
                 <ul class = "list-unstyled">
                     <li class = "my-3">
-                        <a href = "#" class = "text-white text-decoration-none text-muted">
+                        <a href = "{{route('redirect')}}" class = "text-white text-decoration-none text-muted">
                             <i class = "fas fa-chevron-right me-1"></i> Home
                         </a>
                     </li>
                     <li class = "my-3">
-                        <a href = "#" class = "text-white text-decoration-none text-muted">
-                            <i class = "fas fa-chevron-right me-1"></i> Collection
+                        <a href = "{{route('shop.index')}}" class = "text-white text-decoration-none text-muted">
+                            <i class = "fas fa-chevron-right me-1"></i> Shop
                         </a>
                     </li>
                     <li class = "my-3">
@@ -34,20 +34,20 @@
 
             <div class = "col-md-6 col-lg-3">
                 <h5 class = "fw-light mb-3">Contact Us</h5>
-                <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
+                {{-- <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
                     <span class = "me-3">
                         <i class = "fas fa-map-marked-alt"></i>
                     </span>
                     <span class = "fw-light">
                         Albert Street, New York, AS 756, United States of America
                     </span>
-                </div>
+                </div> --}}
                 <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
                     <span class = "me-3">
                         <i class = "fas fa-envelope"></i>
                     </span>
                     <span class = "fw-light">
-                        attire.support@gmail.com
+                        homefurniture@gmail.com
                     </span>
                 </div>
                 <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
