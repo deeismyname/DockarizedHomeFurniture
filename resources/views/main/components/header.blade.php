@@ -1,6 +1,9 @@
 <div class="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container d-flex justify-content-between align-items-center">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <!-- Start Header Logo -->
             <div class="header-logo text-center">
                 <a href="{{ route('redirect') }}">
@@ -43,9 +46,7 @@
             </div>
             {{-- End Login --}}
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
 
             <div class="collapse navbar-collapse order-lg-1" id="navMenu">
                 <ul class="navbar-nav mx-auto text-center">

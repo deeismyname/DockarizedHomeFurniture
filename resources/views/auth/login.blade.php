@@ -1,7 +1,7 @@
 @extends('main.master')
 @section('shop')
 
-<section id="collection" class="py-5 " style="padding-top: 13rem !important">
+<section id="collection" class="py-5 " style="padding-top: 7rem !important">
     <div class="container">
         <div class="g-7 row justify-content-center">
             <form class="box" method="POST" action="{{ route('login') }}">
@@ -95,12 +95,12 @@ body {
 }
 
 .box {
-    max-width: 25rem !important; /* Reduced max-width for smaller size */
+    /* max-width: 25rem !important; */
     padding: 1.5rem; /* Reduced padding */
     background: rgba(30, 26, 26, 0.8);
     text-align: center;
     transition: 0.25s;
-    margin-top: 3rem; /* Reduced margin-top */
+    margin-top: 2rem !important; /* Reduced margin-top */
     border-radius: 15px; /* Added border-radius for softer edges */
 }
 
@@ -171,4 +171,17 @@ body {
         font-size: 0.7rem !important;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .box {
+        max-width: 30rem !important;
+        padding: 1.5rem; /* Reduced padding */
+        background: rgba(30, 26, 26, 0.8);
+        text-align: center;
+        transition: 0.25s;
+        margin-top: 2rem !important; /* Reduced margin-top */
+        border-radius: 15px; /* Added border-radius for softer edges */
+    }
+}
+
 </style>
