@@ -127,7 +127,7 @@
                         <h1>Gh₵ {{ $product->price }}.00</h1>
                     </div>
 
-                    <p>{{ $product->description }}</p>
+                    <p>{{ strip_tags($product->description) }}</p>
 
                     <div class="hightlight">
 

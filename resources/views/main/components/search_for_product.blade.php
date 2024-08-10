@@ -14,24 +14,33 @@
 
 </div>
 <style>
-    .search{
+    .search {
         justify-content: center !important;
-        display:flex !important;
-        max-hieght:20rem !important;
+        display: flex !important;
+        max-height: 20rem !important;
         position: relative;
-
         padding-top: 10rem !important;
         background-color: rgba(132, 131, 131, 0.1);
     }
-    form{
+
+    form {
         justify-content: center !important;
         align-content: center;
         align-items: center;
     }
 
-    input{
+    input {
         text-align: center !important;
     }
+
+    @media (max-width: 767px) {
+        .search .nav-btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
 </style>
+
 
 

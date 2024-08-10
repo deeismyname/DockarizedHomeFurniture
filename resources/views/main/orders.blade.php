@@ -26,16 +26,16 @@
             <div class="p-4 text-black " style="background-color: #f8f9fa;">
               <div class="d-flex justify-content-end text-center py-1">
                 <div>
-                  <p class="mb-1 h5">253</p>
-                  <p class="small text-muted mb-0">Photos</p>
+                  <p class="mb-1 h5">{{$total_orders}}</p>
+                  <p class="small text-muted mb-0">Total Orders</p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-1 h5">1026</p>
-                  <p class="small text-muted mb-0">Followers</p>
+                  <p class="mb-1 h5">3</p>
+                  <p class="small text-muted mb-0">In Progress</p>
                 </div>
                 <div>
-                  <p class="mb-1 h5">478</p>
-                  <p class="small text-muted mb-0">Following</p>
+                  <p class="mb-1 h5">4</p>
+                  <p class="small text-muted mb-0">Completed</p>
                 </div>
               </div>
             </div>

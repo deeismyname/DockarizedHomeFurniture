@@ -17,8 +17,9 @@ class OrdersController extends Controller
         $user = auth()->user();
         $user_id = $user->id;
         $orders = Orders::with('productOrdered')->orderBy('orders.created_at', 'desc')->where('user_id', $user_id)->get();
+        $total_orders = $orders->count();
         //  dd($orders);
-        return view('main.orders', compact('user', 'orders'));
+        return view('main.orders', compact('user', 'orders', 'total_orders'));
     }
 
     /**
