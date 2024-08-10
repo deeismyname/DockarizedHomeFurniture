@@ -7,15 +7,15 @@
             <form class="box" method="POST" action="{{ route('login') }}">
                 @csrf
                 <h1>Login</h1>
-                <p class="text-muted">Please enter your login and password!</p>
+                <p class="text-muted">Please enter your email and password!</p>
 
                 <div>
-                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus>
+                    <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus placeholder="enter your email">
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
                 <div>
-                    <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                    <input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" placeholder="enter your password"/>
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
