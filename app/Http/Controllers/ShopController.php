@@ -15,8 +15,10 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
+        $default_category = "All";
         if($request->category){
             $products = Categories::where('category_name', $request->category)->firstOrFail()->products()->paginate(15)->withQueryString();
+            $default_category = $request->category;
         }
         else{
             $products = Product::latest()->paginate(15);
@@ -24,9 +26,9 @@ class ShopController extends Controller
 
         $categories = Categories::all();
 
-        return view('main.products', compact('products', 'categories'));
+        return view('main.products', compact('products', 'categories', 'default_category'));
         //super works well
-    
+
     }
 
 

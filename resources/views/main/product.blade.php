@@ -8,13 +8,13 @@
         <div class="container">
             <div class="card">
                 <div class="container-fliud">
-                    <div class="wrapper row">
+                    <div class="wrapper row" >
                         <div class="preview col-md-9">
 
                             <div class="preview-pic tab-content">
                                 <div class="images p-3">
                                     <div class="text-center p-4"> <img id="main-image"
-                                            src="{{ asset($product->primary_image) }}" style="width: 100%" /> </div>
+                                            src="{{ asset($product->primary_image) }}" style="width: 80%" /> </div>
                                 </div>
                             </div>
                             <div class=" thumbnail text-center">
@@ -38,18 +38,11 @@
                                 </div>
                                 <span class="review-no">41 reviews</span>
                             </div>
-                            <div>
-                                <p class="product-description">{!! $product->description !!}</p>
-                            </div>
+
                             <h4 class="price">price: Gh₵<span>{{ $product->price }}</span></h4>
-                            <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87
-                                    votes)</strong></p>
-                            <h5 class="sizes">sizes:
-                                <span class="size" data-toggle="tooltip" title="small">s</span>
-                                <span class="size" data-toggle="tooltip" title="medium">m</span>
-                                <span class="size" data-toggle="tooltip" title="large">l</span>
-                                <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-                            </h5>
+                            {{-- <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87
+                                    votes)</strong></p> --}}
+
                             <h5 class="colors">colors:
                                 <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
                                 <span class="color green"></span>
@@ -63,6 +56,55 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Tabs for Description and Comments -->
+                    <div class="wrapper row mt-4">
+                        <ul class="nav nav-tabs" id="productTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link tab-link active" id="description-tab" data-toggle="tab" href="#description" role="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tab-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab">Comments</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tab-link" id="message-tab" data-toggle="tab" href="#message" role="tab">Message</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content p-4">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <h3>Product Description</h3>
+                            <p class="product-description">{!! $product->description !!}</p>
+                        </div>
+                        <div class="tab-pane fade" id="comments" role="tabpanel">
+                            <h3>Product Comments</h3>
+                            @if($product->comments && count($product->comments) > 0)
+                                <ul>
+                                    @foreach($product->comments as $comment)
+                                        <li>{{ $comment->content }} - <strong>{{ $comment->author }}</strong></li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>No comments available for this product.</p>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade" id="message" role="tabpanel">
+                            <h3>Make Enquiries</h3>
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="email">Enter your email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="form-group" style="padding-bottom: 1rem">
+                                    <label for="message">Leave your message</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -141,11 +183,15 @@
     }
 
     .card {
-        margin-top: 5rem;
+        /* margin-top: 3rem; */
         background: #eee;
         /* padding: 3em; */
         line-height: 1.5em;
     }
+
+    /* .row{
+        max-height: 40vh;
+    } */
 
     @media screen and (max-width: 1020px) {
         .thumbnail img {
@@ -371,4 +417,29 @@
     document.addEventListener("DOMContentLoaded", function(event) {
 
     });
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var tabs = document.querySelectorAll('.tab-link');
+    var tabContents = document.querySelectorAll('.tab-pane');
+
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function(event) {
+            event.preventDefault();
+            tabs.forEach(function(t) {
+                t.classList.remove('active');
+            });
+            tabContents.forEach(function(content) {
+                content.classList.remove('show', 'active');
+            });
+
+            tab.classList.add('active');
+            var contentId = tab.getAttribute('href').substring(1);
+            document.getElementById(contentId).classList.add('show', 'active');
+        });
+    });
+});
+
 </script>

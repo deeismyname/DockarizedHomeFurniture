@@ -5,28 +5,21 @@
 
     <section id="collection" class="py-5">
         <div class="container">
-            
 
             <div class="row g-0 product-btn">
-
+                
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
-                    <a href="{{route('shop.index')}}"><button type="button" class="btn m-2 text-dark" data-filter="*">All</button></a>
+                    <a href="{{route('shop.index')}}">
+                        <button type="button" class="btn m-2 text-dark {{ $default_category == 'All' ? 'active' : '' }}" data-filter="*">All</button>
+                    </a>
 
-
-                        @if ($categories->count())
-                            @foreach ($categories as $index => $category)
-                               <a href="{{route('shop.index', ['category' =>$category->category_name])}}">
-                                    <button type="submit" class="btn m-2 text-dark"
-                                    data-filter=".{{ $category->id }}">{{ $category->category_name }}</button>
-                                </a>
-
-
-                                {{-- <button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">All</button>
-                                <button type = "button" class = "btn m-2 text-dark" data-filter = ".best">Best Sellers</button>
-                                <button type = "button" class = "btn m-2 text-dark" data-filter = ".feat">Featured</button>
-                                <button type = "button" class = "btn m-2 text-dark" data-filter = ".new">New Arrival</button> --}}
-                            @endforeach
-                        @endif
+                    @if ($categories->count())
+                        @foreach ($categories as $index => $category)
+                            <a href="{{route('shop.index', ['category' =>$category->category_name])}}">
+                                <button type="submit" class="btn m-2 text-dark {{ $category->category_name == $default_category ? 'active' : '' }}" data-filter=".{{ $category->id }}">{{ $category->category_name }}</button>
+                            </a>
+                        @endforeach
+                    @endif
 
                 </div>
 
@@ -34,10 +27,8 @@
 
             </div>
 
-
     </section>
 @endsection
-
 
 <style>
     .card {
@@ -51,12 +42,12 @@
         background-color: #bbb;
         border-radius: 50%;
         display: inline-block;
-        possition: absolute;
+        position: absolute;
     }
     .black{
         color: black!important;
     }
-    .product-btn:active{
+    .product-btn .btn.active{
         background-color: black!important;
         color: white!important;
     }

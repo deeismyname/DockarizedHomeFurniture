@@ -15,7 +15,9 @@
 <body  style="min-height: 100vh !important; display:block !important; flex-direction:column ">
 
     <!-- navbar -->
-    @include('main.components.header')
+    <div class="nav-component">
+        @include('main.components.header')
+    </div>
     <!-- end of navbar -->
 
   <div style="min-height: 100vh">
