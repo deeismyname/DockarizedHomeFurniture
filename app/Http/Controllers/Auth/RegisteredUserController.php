@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Order;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -52,28 +54,49 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
+    // public function show(){
+    //     $user = Auth()->user();
+
+    //     return view('main.profile', compact('user'));
+    // }
+
     public function show(){
         $user = Auth()->user();
-        return view('main.profile', compact('user'));
+        $total_orders = $user->orders()->count(); // Get the total number of orders
+        $total_orders_completed = $user->orders()->where('status', 'paid')->count();
+        $total_orders_incart = $user->orders()->where('status', 'incart')->count();
+        $page_name = "profile";
+        return view('main.profile', compact('user', 'total_orders', 'total_orders_completed', 'total_orders_incart', 'page_name')); // Pass $total_orders to the view
     }
+
 
     public function edit() {
         $user = Auth()->user();
-        return view('main.edit_profile', compact('user'));
+        $total_orders = $user->orders()->count(); // Get the total number of orders
+        $total_orders_completed = $user->orders()->where('status', 'paid')->count();
+        $total_orders_incart = $user->orders()->where('status', 'incart')->count();
+        return view('main.edit_profile', compact('user', 'total_orders', 'total_orders_completed', 'total_orders_incart'));
     }
 
     public function update (Request $request){
-        $user = Auth()->user();
+        // Retrieve the authenticated user
+        $user = Auth::user();
 
+        // Validate the incoming request data
         $request->validate([
-            'name' => ['string', 'max:255'],
-            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:15',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        // Update the user's information
+        $user->name = $request->input('name') ?? $user->name; // Only update if email is provided
+        $user->email = $request->input('email') ?? $user->email; // Only update if email is provided
+        $user->phone = $request->input('phone') ?? $user->phone; // Only update if phone is provided
+        $user->save();
+
+        // Optionally, redirect back with a success message
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
 
@@ -91,7 +114,8 @@ class RegisteredUserController extends Controller
             'newpassword' => ['required', 'string', 'min:8', 'confirmed']
         ]);
 
-        $currentPasswordStatus = Hash::check($request->oldpassword, auth()->user()->password);
+        $currentPasswCordStatus = Hash::check($request->oldpassword, auth()->user()->password);
+        dd($currentPasswCordStatus);
         if($currentPasswordStatus){
 
             User::findOrFail(Auth::user()->id)->update([

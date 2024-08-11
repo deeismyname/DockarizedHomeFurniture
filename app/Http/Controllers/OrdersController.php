@@ -18,8 +18,12 @@ class OrdersController extends Controller
         $user_id = $user->id;
         $orders = Orders::with('productOrdered')->orderBy('orders.created_at', 'desc')->where('user_id', $user_id)->get();
         $total_orders = $orders->count();
-        //  dd($orders);
-        return view('main.orders', compact('user', 'orders', 'total_orders'));
+        //
+        // $total_orders = $user->orders()->count(); // Get the total number of orders
+        $total_orders_completed = $user->orders()->where('status', 'paid')->count();
+        $total_orders_incart = $user->orders()->where('status', 'incart')->count();
+        //
+        return view('main.orders', compact('user', 'orders', 'total_orders', 'total_orders_completed', 'total_orders_incart'));
     }
 
     /**

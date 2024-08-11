@@ -6,123 +6,65 @@
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col col-lg-12 col-xl-12" style="padding-top: 8rem !important;">
           <div class="card">
-            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                  style="width: 150px; z-index: 1">
-                  <a href="{{route('profile')}}" style="z-index: 1">
-                    <button class="btn btn-danger text-uppercase mr-2 px-4" style="z-index: 1;">
-                        <i class="fas fa-arrow-alt-circle-left"></i> profile
-                      </button>
-                  </a>
 
+            @include('main.components.profile_section')
 
-              </div>
-              <div class="ms-3" style="margin-top: 130px;">
-                <h2>{{$user->name}}</h2>
-
-              </div>
-
-            </div>
-            <div class="p-4 text-black " style="background-color: #f8f9fa;">
-              <div class="d-flex justify-content-end text-center py-1">
-
-                <div>
-                  <p class="mb-1 h5">253</p>
-                  <p class="small text-muted mb-0">Photos</p>
+            <div class="card-body p-4 text-black change_password card chng_pass" style="padding: 2rem;">
+                <div class="details mb-4" style="display: flex;">
+                    <div class="col">
+                        <p class="lead fw-normal mb-1">Edit Profile</p>
+                    </div>
                 </div>
-                <div class="px-3">
-                  <p class="mb-1 h5">1026</p>
-                  <p class="small text-muted mb-0">Followers</p>
-                </div>
-                <div>
-                  <p class="mb-1 h5">478</p>
-                  <p class="small text-muted mb-0">Following</p>
-                </div>
-              </div>
-              {{-- <div class="row" style="z-index: 1; color:#000; padding-top:1rem;">
-                <p>what do you wish to change?</p>
-                <p>click to edit   <span onclick="">  form</span></p>
-              </div> --}}
-            </div>
 
-
-            <div class="card-body p-4 text-black change_password card chng_pass">
-                {{-- <div class="mb-5"> --}}
-
-                   <div class="details" style="display: flex;">
-                      <div class="col">
-                          <p class="lead fw-normal mb-1">Edit Profile</p>
-                      </div>
-                  </div>
-
-                  <div id="collection" class="py-5">
+                <div id="collection" class="py-3">
                     <div class="container">
+                        <div class="row g-3">
+                            <form class="box" method="POST" action="{{ route('update_profile') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="font-italic" style="padding: 0.5rem">Enter New Name: </label>
+                                    <span><input id="name" class="block mt-1 w-full" type="text" name="name"/></span>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label class="font-italic" style="padding: 0.5rem">Enter New Email:  </label>
+                                    <span><input id="email" class="block mt-1 w-full" type="email" name="email"/></span>
+                                </div>
 
-                        <div class="row g-7">
+                                <div class="mb-3">
+                                    <label class="font-italic" style="padding: 0.5rem">Enter New Phone:  </label>
+                                    <span><input id="phone" class="block mt-1 w-full" type="text" name="phone"/></span>
+                                </div>
 
-                   <form  class="box" style="top: 50rem" method="POST" action="{{ route('update_profile') }}">
-                        @csrf
-                        <div>
-                            <label class="font-italic mb-1" style="padding: 1rem">Enter New Name: </label>
-                            <span><input id="name" class="block mt-1 w-full" type="text" name="name"/></span>
+                                <div class="button mt-3">
+                                    <button type="submit" class="btn btn-danger text-uppercase mr-2 px-4">Save</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <div>
-                            <label class="font-italic mb-1" style="padding: 1rem">Enter New Email:  </label>
-                            <span><input id="email" class="block mt-1 w-full" type="email" name="email"/></span>
-                        </div>
-
-                        <div>
-                            <label class="font-italic mb-1" style="padding: 1rem">Enter New Phone:  </label>
-                            <span><input id="phone" class="block mt-1 w-full" type="text" name="phone"/></span>
-                        </div>
-
-                        <div class="button">
-                            <button type="submit" class="btn btn-danger text-uppercase mr-2 px-4">save</button>
-                        </div>
-
-                    </form>
-
-                  </div>
-
+                    </div>
                 </div>
 
-                </div>
-
-                <div class="mb-5">
+                <div class="mb-4">
                     <div class="details" style="display: flex;">
                         <div class="col">
                             <p class="lead fw-normal mb-1">Password:</p>
                         </div>
-
-                        <div class="col" style="padding-right: 2rem">
-                             <span style="right: 0rem">
-                                <a href="{{route('edit_password')}}">
-                                    <button class="btn btn-danger text-uppercase mr-2 px-4 edit" style="z-index: 1;">
-                                        <i class="fas fa-pen"></i> reset
-                                    </button>
-                                </a>
-
-                            </span>
+                        <div class="col text-end">
+                            <a href="{{route('edit_password')}}">
+                                <button class="btn btn-danger text-uppercase mr-2 px-4 edit" style="z-index: 1;">
+                                    <i class="fas fa-pen"></i> Reset
+                                </button>
+                            </a>
                         </div>
-
                     </div>
 
-
-
-                    <div class="p-4" style="background-color: #f8f9fa;">
-                      <h5 class="font-italic mb-1">Hello {{$user->name}},</h5>
-                      <p>Are you scared that your password might have been compromized or you are
-                        just bored with your old password?<br> click the reset button to change it now.
-                      </p>
-
+                    <div class="p-3" style="background-color: #f8f9fa;">
+                        <h5 class="font-italic mb-1">Hello {{$user->name}},</h5>
+                        <p>If you're worried your password might be compromised, or if you're just bored with your old password, click the reset button to change it now.</p>
                     </div>
-                  </div>
-
+                </div>
             </div>
+
         </div>
       </div>
     </div>
@@ -233,13 +175,23 @@
     display: none;
 }
 
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
     .box input[type="email"]:focus,
     .box input[type="text"],
 .box input[type="password"]:focus {
     width: 15rem;
     border-color: #000000
+} */
+
+@media screen and (max-width: 400px) {
+    .box input[type="email"],
+    .box input[type="text"],
+    .box input[type="password"] {
+        width: 100%; /* Ensure the input takes up the full width of its parent */
+        max-width: 90%; /* Prevent the input from exceeding the width of the parent element */
+    }
 }
+
 
 .box input[type="email"],
 .box input[type="text"],

@@ -58,7 +58,7 @@
                     </div>
 
                     <!-- Tabs for Description and Comments -->
-                    <div class="wrapper row mt-4">
+                    <div class="wrapper row mt-4" style="margin-left: 1rem !important; margin-right: 1rem !important">
                         <ul class="nav nav-tabs" id="productTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link tab-link active" id="description-tab" data-toggle="tab" href="#description" role="tab">Description</a>

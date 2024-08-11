@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class passwordResetController extends Controller
 
     public function index()
     {   $user = auth()->user();
-        return view('main.change_password', compact('user'));
+        $total_orders = $user->orders()->count(); // Get the total number of orders
+        $total_orders_completed = $user->orders()->where('status', 'paid')->count();
+        $total_orders_incart = $user->orders()->where('status', 'incart')->count();
+        return view('main.change_password', compact('user', 'total_orders', 'total_orders_completed', 'total_orders_incart'));
     }
 
     public function changePassword(Request $request)
@@ -28,6 +32,7 @@ class passwordResetController extends Controller
         ]);
 
         $currentPasswordStatus = Hash::check($request->current_password, auth()->user()->password);
+        // dd($currentPasswordStatus);
         if($currentPasswordStatus){
 
             User::findOrFail(Auth::user()->id)->update([
