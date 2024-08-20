@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 
@@ -59,12 +60,40 @@ class ShopController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+    // public function show($id)
+    // {
+    //     $category = Categories::all();
+    //     $product = Product::find($id);
+    //     $comments = $product->comments ? json_decode($product->comments, true) : [];
+    //     foreach($comments as $comment){
+    //         $comment->user = User::find($comment[key]);
+    //     }
+    //     return view('main.product', compact('product', 'category', 'comments'));
+    // }
+
     public function show($id)
-    {
-        $category = Categories::all();
-        $product = Product::find($id);
-        return view('main.product', compact('product', 'category'));
+{
+    $category = Categories::all();
+    $product = Product::find($id);
+
+    $comments = $product->comments ? json_decode($product->comments, true) : [];
+    $product->comments = $comments;
+
+
+    // Create an array to store the comments with user information
+    $comments_with_users = [];
+
+    foreach($comments as $user_id => $comment_text) {
+        $user = User::select('name')->find($user_id);
+        $comments_with_users[] = [
+            'content' => $comment_text,
+            'user' => $user ? $user->name : 'Unknown User',
+        ];
     }
+
+    return view('main.product', compact('product', 'category', 'comments_with_users'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

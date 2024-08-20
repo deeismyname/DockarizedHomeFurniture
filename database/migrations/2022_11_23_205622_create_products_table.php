@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('image_1')->nullable();
             $table->string('video_description')->nullable();
             $table->integer('rating')->nullable();
+            $table->json('all_ratings')->nullable();
             $table->json('comments')->nullable();
             $table->timestamps();
             $table->string('supplier_name')->nullable();

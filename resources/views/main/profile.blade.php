@@ -68,35 +68,22 @@
                 </div>
               </div>
 
+              @if (!is_null($recent_orders))
               <div class="d-flex justify-content-between align-items-center mb-4">
                 <p class="lead fw-normal mb-0">Recent Orders</p>
                 <h5 class="mb-0"><a href="{{route('orders')}}" class="text-muted">Show all >></a></h5>
               </div>
 
-
-
               <div class="row g-2">
+                @foreach ($recent_orders as $recent_order)
                 <div class="col">
-                  <img src="{{asset('upload/products/237168031d88451c78fd8d6d6378c0b2.jpeg')}}"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                <div class="col mb-2">
-                  <img src="{{asset('upload/products/13403518ef9c1ce843a289d991f79bf5.jpg')}}"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
+                    <img src="{{asset($recent_order->productOrdered->primary_image)}}"
+                      alt="image 1" class="w-100 rounded-3">
+                  </div>
+                @endforeach
+
               </div>
-
-
-              {{-- <div class="row g-2">
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-              </div> --}}
+              @endif
             </div>
           </div>
         </div>

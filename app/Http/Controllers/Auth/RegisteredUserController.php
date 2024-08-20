@@ -54,19 +54,14 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-    // public function show(){
-    //     $user = Auth()->user();
-
-    //     return view('main.profile', compact('user'));
-    // }
-
     public function show(){
         $user = Auth()->user();
         $total_orders = $user->orders()->count(); // Get the total number of orders
         $total_orders_completed = $user->orders()->where('status', 'paid')->count();
         $total_orders_incart = $user->orders()->where('status', 'incart')->count();
         $page_name = "profile";
-        return view('main.profile', compact('user', 'total_orders', 'total_orders_completed', 'total_orders_incart', 'page_name')); // Pass $total_orders to the view
+        $recent_orders = $user->orders()->latest()->take(2)->get();
+        return view('main.profile', compact('user', 'total_orders', 'total_orders_completed', 'total_orders_incart', 'page_name', 'recent_orders')); // Pass $total_orders to the view
     }
 
 

@@ -81,8 +81,8 @@
                             <h3>Product Comments</h3>
                             @if($product->comments && count($product->comments) > 0)
                                 <ul>
-                                    @foreach($product->comments as $comment)
-                                        <li>{{ $comment->content }} - <strong>{{ $comment->author }}</strong></li>
+                                    @foreach($comments_with_users as $comment)
+                                        <li>{{ $comment['content'] }} - <strong>{{ $comment['user'] }}</strong></li>
                                     @endforeach
                                 </ul>
                             @else

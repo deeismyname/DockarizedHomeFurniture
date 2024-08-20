@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('region')->nullable();
             $table->string('delivery_address')->nullable();
             $table->string('gps_address')->nullable();
+            $table->float('rating')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

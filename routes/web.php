@@ -33,6 +33,10 @@ Route::middleware(['status'])->group(function () {
 Route::resource('/shop', ShopController::class);
 Route::get('search', [ProductController::class, 'search'])->name('search');
 
+//Products
+Route::post('rate', [ProductController::class, 'rate'])->name('rate_product');
+Route::post('comment', [ProductController::class, 'comment'])->name('comment');
+
 
 //profile
 Route::middleware(['auth'])->group(function () {

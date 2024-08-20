@@ -53,12 +53,17 @@ class OrdersController extends Controller
      * @param  \App\Models\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show(Request $request)
     {
+        $id = $request->id;
         $user = auth()->user();
+        $order = $user->orders()->findOrFail($id);
+        $total_orders = $user->orders()->count(); // Get the total number of orders
+        $total_orders_completed = $user->orders()->where('status', 'paid')->count();
+        $total_orders_incart = $user->orders()->where('status', 'incart')->count();
 
 
-        return view('main.order', compact('user'));
+        return view('main.order', compact('user', 'order', 'total_orders', 'total_orders_completed', 'total_orders_incart'));
     }
 
     /**

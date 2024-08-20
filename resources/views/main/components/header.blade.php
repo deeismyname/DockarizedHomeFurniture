@@ -28,8 +28,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa fa-portrait"></i> Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Orders</a>
-                                    <a class="dropdown-item" href="#"><i class="ri-lock-unlock-line"></i> Lock screen</a>
+                                    <a class="dropdown-item" href="{{route('orders')}}"><i class="fa fa-shopping-cart"></i> My Orders</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Logout</a>
                                 </div>
