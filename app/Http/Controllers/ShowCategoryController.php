@@ -34,7 +34,7 @@ class ShowCategoryController extends Controller
     public function create(Request $request)
     {
         // $category = Categories::find($id);
-        return view('admin.edit.create_category', compact('category'));
+        return view('admin.edit.create_category');
     }
 
     /**
