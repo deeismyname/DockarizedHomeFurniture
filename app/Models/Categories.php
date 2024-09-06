@@ -20,4 +20,6 @@ class Categories extends Model
 public function heros(){
     return $this->hasMany(WelcomeImage::class);
 }
+
+public $timestamps = false;
 }

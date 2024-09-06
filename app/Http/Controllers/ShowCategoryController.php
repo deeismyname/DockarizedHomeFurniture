@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShowCategory;
+use App\Models\Categories;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,16 @@ class ShowCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // { $product = Product::find('all');
+    //     return view('admin.edit.display_category', compact('product'));
+    // }
+
     public function index()
-    { $product = Product::find('all');
-        return view('admin.edit.display_category', compact('product'));
+    {
+        $categories = Categories::all();
+        // dd($categories);
+        return view('admin.edit.display_category', compact('categories'));
     }
 
     /**
@@ -23,9 +31,10 @@ class ShowCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // $category = Categories::find($id);
+        return view('admin.edit.create_category', compact('category'));
     }
 
     /**
@@ -36,7 +45,24 @@ class ShowCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category_name = $request->category_name;
+        $categories_id = $request->categories_id;
+
+        $create_category = Categories::create([
+            'category_name' => $category_name,
+            'categories_id' => $categories_id
+        ]);
+
+        $notification = array(
+            'message' => 'Welcome image created with Image Successfully',
+            'alert-type' => 'success'
+        );
+
+        if($create_category){
+            return redirect()->route('show_category.index')->with($notification);
+        }else{
+            return redirect()->route('show_category.index')->with("Something went wrong. Please try again later");
+        }
     }
 
     /**
@@ -56,9 +82,9 @@ class ShowCategoryController extends Controller
      * @param  \App\Models\ShowCategory  $showCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ShowCategory $showCategory)
+    public function edit(Category $Category)
     {
-        //
+        return view('admin.edit.edit_category', compact('category'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Models\Product;
 use App\Models\ShowCategory;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;

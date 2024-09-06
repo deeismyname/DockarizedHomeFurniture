@@ -1,85 +1,77 @@
 @extends('admin.master')
 @section('admin')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
-<div class="page-content">
-<div class="container-fluid">
+    <div class="page-content">
+        <div class="container-fluid">
 
-<div class="row">
-<div class="col-12">
-    <div class="card">
-        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
 
-            <h4 class="card-title">Set Category To Display</h4>
+                            <div class="top_info"
+                                style="display: flex; justify-content:space-around; padding-bottom: 0.5rem; ">
+                                <h4>All categories</h4>
+                               <a href="{{route('show_category.create')}}"> <div class="btn btn-success" class="padding: 1rem;">+ Add Category</div></a>
+                            </div>
 
-            <form method="POST" action="" enctype="multipart/form-data">
-                {{-- {{route('set_page.update', ['set_page' => $->id])}} --}}
-                @method('PUT')
-                @csrf
-                {{-- {{route('set_page.update')}} --}}
+                            {{-- table of all products --}}
+                            <table class="table table-striped table-hover">
 
-                {{-- <input type="hidden" name="id" value="{{$product->id}}"> --}}
+                                <thead style="background-color: rgb(37, 43, 59); color:aliceblue; font-size:1rem;">
 
-            <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">Catchy title</label>
-                <div class="col-sm-10">
-                    <input name="catchy_title" class="form-control" type="text" value=""  id="example-text-input">
-                </div>
+                                    <tr  style="text-align: center">
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Categories Id</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody style="background-color:rgb(37, 43, 59, 0.1); font-size:0.8rem; ">
+
+                                    @if ($categories->count())
+                                        @foreach ($categories as $index => $category)
+                                            <tr  style="text-align: center; allign-items: center;">
+                                                <td>{{ $category->id }}</td>
+                                                <td>{{ $category->category_name }}</td>
+                                                <td>{{ $category->categories_id }}</td>
+                                                {{-- <td>
+                @foreach ($menu->description as $description)
+                {{-- {{$description}} --}}
+                                                {{-- <p>1</p>
+                @endforeach
+            </td> --}}
+                                                <td style="display:flex; a ">
+
+                                                    <div style="display: flex">
+                                                        <a href="{{ route('products.show', $category->id) }}" title="Show"><div class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i> show</div></a><span> . </span>
+                                                        <a href="{{ route('products.edit', $category) }}" title="Edit"><div class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i> edit</div></a>.
+                                                        {{-- @include('menu.order_menu') --}}
+                                                        <form method="post" action="{{route('products.destroy',$category->id)}}">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                        </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+
+                            {{-- end of products table --}}
+
+                        </div>
+                    </div>
+                </div> <!-- end col -->
             </div>
-            <!-- end row -->
 
-              <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">Bold short Image detail</label>
-                <div class="col-sm-10">
-                    <input name="bold_short_Image_detail" class="form-control" type="text" value=""  id="example-text-input">
-                </div>
-            </div>
-            <!-- end row -->
-
-
-            <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">Category Image</label>
-                <div class="col-sm-10">
-                <input name="image" class="form-control" type="file"  id="image">
-                </div>
-            </div>
-            <!-- end row -->
-
-              <div class="row mb-3">
-                 <label for="example-text-input" class="col-sm-2 col-form-label"> Image Preview</label>
-                <div class="col-sm-10">
-                    {{-- <img id="showImage" class="" width="500px" src="{{ (!empty($hero->image))? url('upload/hero/'.$hero->image):url('upload/no_image.jpg') }}" alt="Hero image"> --}}
-                </div>
-            </div>
-            <!-- end row -->
-                    <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Profile">
-            </form>
-
-            {{-- <a href="{{route('admin.profile')}}"><input  class="btn btn-danger waves-effect waves-light" value="Cancel" ></a> --}}
 
 
         </div>
     </div>
-</div> <!-- end col -->
-</div>
-
-
-
-</div>
-</div>
-
-
-<script type="text/javascript">
-
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
 
 @endsection

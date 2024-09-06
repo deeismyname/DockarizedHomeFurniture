@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('category_name');
             $table->integer('categories_id')->nullable();
+            $table->timestamps();
         });
     }
 

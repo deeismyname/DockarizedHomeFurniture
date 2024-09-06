@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->float('rating')->nullable()->change();
         });
     }
 
