@@ -22,7 +22,7 @@ class CreateWelcomeImagesTable extends Migration
             $table->unsignedInteger('categories_id')->nullable()->index('categories_id');
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      *

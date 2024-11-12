@@ -3,6 +3,7 @@
 use App\Models\Product;
 use App\Models\ShowCategory;
 use App\Models\Categories;
+use App\Http\Controllers\UserManagement;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
@@ -38,6 +39,8 @@ Route::get('search', [ProductController::class, 'search'])->name('search');
 Route::post('rate', [ProductController::class, 'rate'])->name('rate_product');
 Route::post('comment', [ProductController::class, 'comment'])->name('comment');
 
+//User management
+Route::resource('/user_management', UserManagement::class)->middleware('is_admin');
 
 //profile
 Route::middleware(['auth'])->group(function () {

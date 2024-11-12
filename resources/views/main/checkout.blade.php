@@ -22,7 +22,7 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="user_id" required>
                     <input type="hidden" name="email" value="{{ Auth::user()->email }}" id="email-address">
                     <input type="hidden" name="product_id" value="{{ $product->id }}" id="product_id" required>
-                    <input type="hidden" name="order_id" value="{{$order->id}}">
+                    {{-- <input type="hidden" name="order_id" value="{{$order->id}}"> --}}
                     <input type="hidden" name="currency" value="GHS">
                     <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
 

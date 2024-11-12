@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Orders;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Paystack;
 
@@ -54,13 +55,7 @@ class CheckoutController extends Controller
         $date = date('d-m-Y H:i:s');
         $product = Product::findOrFail($id);
 
-        // init an empty order with the product id and user id
-        $order = new Orders();
-        $order->user_id = Auth::user()->id;
-        $order->product_id = $product->id;
-        $order->save();
-
-        return view('main.checkout', compact('product', 'date', 'order'));
+        return view('main.checkout', compact('product', 'date'));
     }
 
     /**
@@ -135,26 +130,63 @@ class CheckoutController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
+    // public function redirectToGateway(Request $request)
+    // {
+    //     // $order = Orders::findOrFail($request->order_id);
+    //     // dd($order);
+
+    //     try {
+    //         //create order after checckout to avoid empty orders
+    //         $order = new Orders();
+    //         $order->user_id = Auth::user()->id;
+    //         $order->product_id = $request->product_id;
+
+    //         $order->payment_reference = $request->reference;
+    //         $order->street_address = $request->address;
+    //         $order->city_town = $request->city;
+    //         $order->region = $request->region;
+    //         $order->locality = $request->locality;
+    //         $order->delivery_address = $request->delivery_address;
+    //         $order->gps_address = $request->gps_address;
+    //         $order->save();
+
+    //         return Paystack::getAuthorizationUrl()->redirectNow();
+    //     } catch (\Exception $e) {
+    //         $order->delete();
+    //         // dd($e);
+    //         return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
+    //     }
+    // }
+
     public function redirectToGateway(Request $request)
     {
-        $order = Orders::findOrFail($request->order_id);
-        try {
-            $order->payment_reference = $request->reference;
-            $order->street_address = $request->address;
-            $order->city_town = $request->city;
-            $order->region = $request->region;
-            $order->locality = $request->locality;
-            $order->delivery_address = $request->delivery_address;
-            $order->gps_address = $request->gps_address;
-            $order->save();
+        $data = [
+            'email' => $request->email,
+            'amount' => $request->amount, // Ensure amount is in kobo (multiplied by 100)
+            'metadata' => json_encode([
+                'payment' => 'paid',
+            ])
+        ];
 
-            return Paystack::getAuthorizationUrl()->redirectNow();
-        } catch (\Exception $e) {
-            $order->delete();
-            // dd($e);
-            return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
+        $paystackResponse = Http::withToken('sk_test_ccfa17ed43edbcf16be47ee509fda4d273c25253')
+            ->post('https://api.paystack.co/transaction/initialize', $data)
+            ->json();
+
+        // Convert response to a collection (optional, but consistent with your approach)
+        $paystackResponse = collect($paystackResponse);
+
+        if ($paystackResponse->get('status') === true && isset($paystackResponse['data']['authorization_url'])) {
+            return redirect($paystackResponse['data']['authorization_url']);
+        } else {
+            $message = 'Sorry, unable to make payment at this moment.';
+            return response()->json([
+                'success' => false,
+                'message' => $message,
+                'data' => $paystackResponse
+            ]);
         }
     }
+
 
     /**
      * Obtain Paystack payment information
