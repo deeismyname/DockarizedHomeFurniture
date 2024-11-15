@@ -1,22 +1,25 @@
-FROM php:8.2-apache
+FROM php:8.2
 
-RUN apt-get update && \
-    apt-get install -y \
-        libzip-dev \
-        zip
+# Install system dependencies, extensions, etc.
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    unzip \
+    && docker-php-ext-install pdo_mysql zip bcmath
 
-RUN docker-php-ext-install pdo_mysql zip
-
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-COPY . /var/www/html
-
+# Set working directory
 WORKDIR /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Copy files
+COPY . .
 
-RUN composer install
+# Ensure the entrypoint script is executable
+RUN chmod +x docker/entrypoint.sh
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Set permissions (be cautious about 777, try 755 or 775 if possible)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
+
+# Command to run on container start
+ENTRYPOINT ["docker/entrypoint.sh"]
+CMD ["php-fpm"]

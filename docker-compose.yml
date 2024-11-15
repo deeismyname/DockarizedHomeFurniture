@@ -1,0 +1,93 @@
+# version: "3.8"
+
+# services:
+
+#     #PHP
+#     php:
+#         build:
+#             context:  .
+#             target: php
+#             args:
+#                 - APP_ENV=${APP_ENV}
+#         environment:
+#             - APP_ENV=${APP_ENV}
+#             - CONTAINER_ROLE=app
+#         working_dir: /var/www/html
+#         volumes:
+#             - ./:/var/www/html
+#         ports:
+#             - 8000:8000
+#         depends_on:
+#             - my-sql-server
+#             - redis
+
+#     #database
+#     my-sql-server:
+#         image: mysql:8.0
+#         ports:
+#             - 3306:3306
+#         environment:
+#             - MYSQL_DATABASE=${DB_DATABASE}
+#             - MYSQL_USER=${DB_USERNAME}
+#             - MYSQL_PASSWORD=${DB_PASSWORD}
+#             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+#         volumes:
+#             - db-data:/var/lib/mysql
+
+#     #redis server
+#     redis:
+#         image: redis:alpine
+#         command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+#         ports:
+#           - 6379:6379
+
+# volumes:
+#     db-data: ~
+
+
+
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docarizedhomefurniture-php
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=local
+      - DB_HOST=my-sql-server
+      - DB_PORT=3306
+      - DB_DATABASE=home_furniture
+      - DB_USERNAME=root
+      - DB_PASSWORD=dee
+    depends_on:
+      - my-sql-server
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  my-sql-server:
+    image: mysql:8.0
+    container_name: docarizedhomefurniture-my-sql-server-1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dee
+      MYSQL_DATABASE: home_furniture
+      MYSQL_USER: dee
+      MYSQL_PASSWORD: dee
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:alpine
+    container_name: docarizedhomefurniture-redis-1
+    ports:
+      - "6379:6379"
+
+volumes:
+  db_data:
