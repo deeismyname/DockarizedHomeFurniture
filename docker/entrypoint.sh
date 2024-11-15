@@ -1,4 +1,4 @@
-# #!/bin/bash
+
 
 # if [! mysql -u $DB_USER -p$DB_PASSWORD -e "USE $DB_NAME"]; then
 #     echo "Database $DB_NAME does not exist. Creating it..."
