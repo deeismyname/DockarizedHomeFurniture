@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-# Ensure composer dependencies are installed
-if [ ! -f "vendor/autoload.php" ]; then
-    composer install --prefer-dist --no-progress --no-interaction
-fi
+# # Ensure composer dependencies are installed
+# if [ ! -f "vendor/autoload.php" ]; then
+#     composer install --prefer-dist --no-progress --no-interaction
+# fi
 
 # Copy .env file if it doesn't exist
 if [ ! -f ".env" ]; then
