@@ -1,5 +1,8 @@
 FROM php:8.2
 
+# Install netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
+
 # Install system dependencies, extensions, etc.
 RUN apt-get update && apt-get install -y \
     libzip-dev \

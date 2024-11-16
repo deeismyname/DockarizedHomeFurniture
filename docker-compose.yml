@@ -1,51 +1,3 @@
-# version: "3.8"
-
-# services:
-
-#     #PHP
-#     php:
-#         build:
-#             context:  .
-#             target: php
-#             args:
-#                 - APP_ENV=${APP_ENV}
-#         environment:
-#             - APP_ENV=${APP_ENV}
-#             - CONTAINER_ROLE=app
-#         working_dir: /var/www/html
-#         volumes:
-#             - ./:/var/www/html
-#         ports:
-#             - 8000:8000
-#         depends_on:
-#             - my-sql-server
-#             - redis
-
-#     #database
-#     my-sql-server:
-#         image: mysql:8.0
-#         ports:
-#             - 3306:3306
-#         environment:
-#             - MYSQL_DATABASE=${DB_DATABASE}
-#             - MYSQL_USER=${DB_USERNAME}
-#             - MYSQL_PASSWORD=${DB_PASSWORD}
-#             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-#         volumes:
-#             - db-data:/var/lib/mysql
-
-#     #redis server
-#     redis:
-#         image: redis:alpine
-#         command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
-#         ports:
-#           - 6379:6379
-
-# volumes:
-#     db-data: ~
-
-
-
 version: '3.8'
 
 services:
@@ -69,6 +21,19 @@ services:
       - my-sql-server
     command: php artisan serve --host=0.0.0.0 --port=8000
 
+# # Apache2 Web Server
+#   apache:
+#     image: php:8.0-apache
+#     container_name: docarizedhomefurniture-apache
+#     volumes:
+#       - .:/var/www/html
+#       - ./apache2.conf:/etc/apache2/sites-available/000-default.conf
+#     ports:
+#       - "80:80"  # Expose port 80 for HTTP traffic
+#     depends_on:
+#       - php
+
+# Mysql
   my-sql-server:
     image: mysql:8.0
     container_name: docarizedhomefurniture-my-sql-server-1

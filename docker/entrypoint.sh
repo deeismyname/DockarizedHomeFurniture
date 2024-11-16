@@ -1,4 +1,3 @@
-
 #!/bin/bash
 set -e
 
@@ -14,6 +13,13 @@ if [ ! -f ".env" ]; then
     php artisan key:generate
 fi
 
+echo "Waiting for the database to be ready..."
+while ! nc -z my-sql-server 3306; do
+  sleep 1
+done
+
+echo "Database is up - executing migrations and starting the service."
+
 # Clear and cache configuration (optional)
 php artisan cache:clear
 php artisan config:clear
@@ -23,6 +29,9 @@ php artisan config:cache
 # Run migrations (optional: add --seed if you want to seed the database)
 php artisan migrate --force
 
+#create one admin and one user
+# php artisan db:seed --class=UserSeeder
+
+
 # Start the application (or leave for service startup)
 exec "$@"
-a
