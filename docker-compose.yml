@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # PHP Service (with Laravel Artisan command)
   php:
     build:
       context: .
@@ -8,8 +9,6 @@ services:
     container_name: docarizedhomefurniture-php
     volumes:
       - .:/var/www/html
-    ports:
-      - "8000:8000"
     environment:
       - APP_ENV=local
       - DB_HOST=my-sql-server
@@ -20,20 +19,22 @@ services:
     depends_on:
       - my-sql-server
     command: php artisan serve --host=0.0.0.0 --port=8000
+    ports:
+      - "8000:8000"
 
-# # Apache2 Web Server
-#   apache:
-#     image: php:8.0-apache
-#     container_name: docarizedhomefurniture-apache
-#     volumes:
-#       - .:/var/www/html
-#       - ./apache2.conf:/etc/apache2/sites-available/000-default.conf
-#     ports:
-#       - "80:80"  # Expose port 80 for HTTP traffic
-#     depends_on:
-#       - php
+  # Apache Web Server
+  apache:
+    image: php:8.0-apache
+    container_name: docarizedhomefurniture-apache
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/html
+      - ./apache2.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "80:80"
 
-# Mysql
+  # MySQL Database Server
   my-sql-server:
     image: mysql:8.0
     container_name: docarizedhomefurniture-my-sql-server-1
@@ -48,11 +49,13 @@ services:
     ports:
       - "3306:3306"
 
+  # Redis Service
   redis:
     image: redis:alpine
     container_name: docarizedhomefurniture-redis-1
     ports:
       - "6379:6379"
 
+# Named volumes for data persistence
 volumes:
   db_data:

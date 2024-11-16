@@ -1,7 +1,4 @@
-FROM php:8.2
-
-# Install netcat
-RUN apt-get update && apt-get install -y netcat-openbsd
+FROM php:8.2-apache
 
 # Install system dependencies, extensions, etc.
 RUN apt-get update && apt-get install -y \
@@ -9,7 +6,13 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo_mysql zip bcmath
 
-# Set working directory
+# Install Netcat
+RUN apt-get install -y netcat-openbsd
+
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Set the working directory
 WORKDIR /var/www/html
 
 # Copy files
@@ -25,4 +28,4 @@ RUN chown -R www-data:www-data /var/www/html \
 
 # Command to run on container start
 ENTRYPOINT ["docker/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
